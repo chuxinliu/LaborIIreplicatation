@@ -1,0 +1,37 @@
+\begin{table}[htbp]\centering
+\def\sym#1{\ifmmode^{#1}\else\(^{#1}\)\fi}
+\caption{Pre-Trends ADH Weighted}
+\begin{tabular}{l*{3}{c}}
+\toprule
+                    &\multicolumn{1}{c}{(1)}   &\multicolumn{1}{c}{(2)}   &\multicolumn{1}{c}{(3)}   \\
+                    &\shortstack{Fitted IPW}   &\shortstack{Fitted IPW}   &\shortstack{Fitted IPW}   \\
+\midrule
+lag\_ln\_pop1664\_change&    0.006*  &    0.006***&    0.001   \\
+                    &  (0.004)   &  (0.002)   &  (0.007)   \\
+\addlinespace
+l\_shind\_manuf\_cbp   &    0.117***&    0.070***&    0.196***\\
+                    &  (0.007)   &  (0.005)   &  (0.011)   \\
+\addlinespace
+l\_sh\_popedu\_c       &    0.017** &    0.011   &    0.026** \\
+                    &  (0.008)   &  (0.008)   &  (0.010)   \\
+\addlinespace
+l\_sh\_popfborn       &    0.022***&    0.021***&    0.023***\\
+                    &  (0.004)   &  (0.003)   &  (0.005)   \\
+\addlinespace
+l\_sh\_empl\_f         &    0.010   &    0.019** &   -0.011   \\
+                    &  (0.010)   &  (0.007)   &  (0.015)   \\
+\addlinespace
+l\_sh\_routine33      &   -0.095*  &   -0.055***&   -0.163** \\
+                    &  (0.048)   &  (0.016)   &  (0.068)   \\
+\addlinespace
+l\_task\_outsource    &    0.385   &   -0.076   &    1.125***\\
+                    &  (0.279)   &  (0.083)   &  (0.383)   \\
+\midrule
+Observations        &     1444   &      722   &      722   \\
+\(R^{2}\)           &    0.736   &    0.684   &    0.772   \\
+Region-Year FE      &            &            &            \\
+\bottomrule
+\multicolumn{4}{l}{\footnotesize Standard errors in parentheses}\\
+\multicolumn{4}{l}{\footnotesize * p<.1, ** p<0.05, *** p<0.01}\\
+\end{tabular}
+\end{table}
