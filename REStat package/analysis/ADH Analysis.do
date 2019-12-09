@@ -10,17 +10,17 @@ clear*
 set more off, perm
 capture log close
 
-global datadir "/Users/johnlopresti/Dropbox/Trade shocks and migration/Replication data and programs/data"
-global outdir  "/Users/johnlopresti/Dropbox/Trade shocks and migration/Replication data and programs/results"
+global datadir "F:\GitHub\LaborIIreplicatation\REStat package\data"
+global outdir  "F:\GitHub\LaborIIreplicatation\Result"
 cd "$datadir"
 
-log using "$outdir/ADH Analysis", replace text
+*log using "$outdir/ADH Analysis", replace text
 
 
 ********************************************************************************
 *Opening IPUMS Data, Creating Population Change Measures************************
 ********************************************************************************
-use "IPUMS_CZ_1664_7010_ADH", clear
+use "IPUMS_CZ_1664_7010_ADH.dta", clear
 
 keep if year == 1980 | year == 1990 | year == 2000 | year == 2007
 
@@ -339,7 +339,7 @@ rm "age1664_kdensity_8090.gph"
 rm "age1664_kdensity_9000.gph"
 		
 
-log close
+*log close
 
 
 

@@ -1,0 +1,67 @@
+\begin{table}[htbp]\centering
+\def\sym#1{\ifmmode^{#1}\else\(^{#1}\)\fi}
+\caption{10-Year Population Changes, IRS}
+\begin{tabular}{l*{2}{c}}
+\toprule
+                    &\multicolumn{1}{c}{(1)}   &\multicolumn{1}{c}{(2)}   \\
+                    &\shortstack{Population\\Change}   &\shortstack{Population\\Change}   \\
+\midrule
+(mean) ntr\_gap      &   -0.359***&   -0.466***\\
+                    &  (0.111)   &  (0.108)   \\
+\addlinespace
+(sum) cap\_labor     &   -0.019*  &   -0.018   \\
+                    &  (0.012)   &  (0.011)   \\
+\addlinespace
+(sum) skill\_int     &    0.096   &    0.067   \\
+                    &  (0.074)   &  (0.064)   \\
+\addlinespace
+fem\_lf\_share        &   -0.512*  &   -0.377   \\
+                    &  (0.309)   &  (0.270)   \\
+\addlinespace
+l\_sh\_popedu\_c       &    0.000   &    0.001   \\
+                    &  (0.001)   &  (0.001)   \\
+\addlinespace
+l\_sh\_routine33      &    0.000   &    0.001   \\
+                    &  (0.002)   &  (0.002)   \\
+\addlinespace
+hispanic\_share      &    0.088*  &    0.111** \\
+                    &  (0.051)   &  (0.043)   \\
+\addlinespace
+black\_share         &   -0.100** &   -0.101***\\
+                    &  (0.040)   &  (0.034)   \\
+\addlinespace
+under25\_share       &    0.377***&    0.331***\\
+                    &  (0.113)   &  (0.100)   \\
+\addlinespace
+amind\_share         &   -0.066   &   -0.004   \\
+                    &  (0.064)   &  (0.077)   \\
+\addlinespace
+asian\_share         &   -0.401** &   -0.649***\\
+                    &  (0.197)   &  (0.178)   \\
+\addlinespace
+(sum) neighbor\_fx   &    0.668** &    0.080   \\
+                    &  (0.300)   &  (0.258)   \\
+\addlinespace
+l\_task\_outsource    &    0.044***&    0.030***\\
+                    &  (0.014)   &  (0.011)   \\
+\addlinespace
+break\_estimate      &    0.203***&    0.211***\\
+                    &  (0.070)   &  (0.066)   \\
+\addlinespace
+(sum) weighted\_d2inyf&   -0.008   &    0.002   \\
+                    &  (0.028)   &  (0.025)   \\
+\addlinespace
+lnet\_pop\_ex\_rate\_10 &    0.632***&            \\
+                    &  (0.062)   &            \\
+\addlinespace
+lnet\_pop\_ret\_rate\_10&            &    0.542***\\
+                    &            &  (0.056)   \\
+\midrule
+Observations        &      600   &      600   \\
+\(R^{2}\)           &    0.763   &    0.758   \\
+Region FE           &        Y   &        Y   \\
+\bottomrule
+\multicolumn{3}{l}{\footnotesize Standard errors in parentheses}\\
+\multicolumn{3}{l}{\footnotesize * p<.1, ** p<0.05, *** p<0.01}\\
+\end{tabular}
+\end{table}

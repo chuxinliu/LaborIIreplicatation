@@ -2,8 +2,8 @@
 ////////////////////////////////////////////////////////////////////////////////////////////////////|
 clear*
 set more off, perm
-global datadir "C:/Users/agreenland/Dropbox/Trade shocks and migration/Replication data and programs/data"
-global outdir  "C:/Users/agreenland/Dropbox/Trade shocks and migration/Replication data and programs/results"
+global datadir "F:\GitHub\LaborIIreplicatation\REStat package\data"
+global outdir  "F:\GitHub\LaborIIreplicatation\Result"
 cd "$datadir"
 ////////////////////////////////////////////////////////////////////////////////////////////////////|
 use "Census Population Data 1970-2010.dta", clear
@@ -15,7 +15,7 @@ use "Census Population Data 1970-2010.dta", clear
 		drop `pop'share
 	}
 	keep year czone *share1990
-save "Census_1990Share_Controls.dta",replace
+save "Census_1990Share_Controls.dta", replace
 
 use "IPUMS_CZ_1564_7010_withGQ.dta", clear
 drop if year == 2007

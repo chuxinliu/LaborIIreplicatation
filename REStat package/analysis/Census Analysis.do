@@ -13,12 +13,12 @@ Table A4 -- Repeating Table 1 using the 1980-1990 population growth in both peri
 set more off
 cap log close
 
-global datadir "/Users/johnlopresti/Dropbox/Trade shocks and migration/Replication data and programs/data"
-global outdir  "/Users/johnlopresti/Dropbox/Trade shocks and migration/Replication data and programs/results"
+global datadir "F:\GitHub\LaborIIreplicatation\REStat package\data"
+global outdir  "F:\GitHub\LaborIIreplicatation\Result"
 cd "$datadir"
 
-cap log close
-log using "$outdir/Census Analysis", replace text
+*cap log close
+*log using "$outdir/Census Analysis", replace text
 
 ********************************************************************************
 *Opening Census Data, Creating Population Change Measures***********************
@@ -299,4 +299,4 @@ merge m:1 czone using "NTR GAP.dta", keepusing(ntr_gap)
 rm "age1564_kdensity_9000.gph"
 rm "age1564_kdensity_8090.gph"
 	
-log close
+*log close

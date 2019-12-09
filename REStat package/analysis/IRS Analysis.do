@@ -9,8 +9,8 @@ clear*
 set more off, perm
 capture log close
 
-global datadir "/Users/johnlopresti/Dropbox/Trade shocks and migration/Replication data and programs/data"
-global outdir  "/Users/johnlopresti/Dropbox/Trade shocks and migration/Replication data and programs/results"
+global datadir "F:\GitHub\LaborIIreplicatation\REStat package\data"
+global outdir  "F:\GitHub\LaborIIreplicatation\Result"
 cd "$datadir"
 
 
