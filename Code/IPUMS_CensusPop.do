@@ -70,12 +70,11 @@ by cz90: keep if _n==_N
 foreach i of varlist pop*{
 egen natl_`i'=sum(cz_`i')
 }
-drop cz_pop1980 natl_pop1980
+drop cz_pop1980 natl_pop1980 _merge
 save "$datadir\working_data\1980census_pop.dta", replace
-*/
 
 
-/*2, 1990
+*2, 1990
 use "$datadir\usa_00005.dta", clear
 tab year, m
 keep if year == 1990
@@ -127,11 +126,11 @@ by cz90: keep if _n==_N
 foreach i of varlist pop*{
 egen natl_`i'=sum(cz_`i')
 }
-drop cz_pop1990 natl_pop1990
+drop cz_pop1990 natl_pop1990 _merge
 save "$datadir\working_data\1990census_pop.dta", replace
-*/
 
-/*3, 2000
+
+*3, 2000
 use "$datadir\usa_00005.dta", clear
 tab year, m
 keep if year == 2000
@@ -183,9 +182,8 @@ by cz90: keep if _n==_N
 foreach i of varlist pop*{
 egen natl_`i'=sum(cz_`i')
 }
-drop cz_pop2000 natl_pop2000
+drop cz_pop2000 natl_pop2000 _merge
 save "$datadir\working_data\2000census_pop.dta", replace
-*/
 
 
 *4. 2010: keep only 2010
@@ -231,17 +229,13 @@ gen pop_5564_lshs=1 if age>=55 & age<=64 & educd<62
 gen pop_5564_hssc=1 if age>=55 & age<=64 & educd>=62 & educd<=100
 gen pop_5564_cg=1 if age>=55 & age<=64 & educd>=101
 
+/* puma==77777 will not be matched due to insufficient size */
+/* crosswalk file is still puma_cz_cross_2000.dta according to Peter McHenry */
 
-//////////////////
-/*
-Something is wrong with PUMA & Statefip
-in year 2010's crosswalk file
-*/
-//////////////////
-
-/*
 collapse (sum) pop* [pw=perwt], by(statefip puma)
-merge 1:m statefip puma using "$datadir\PUMA_CZ_crosswalks\puma_cz_cross_2010.dta"
+merge 1:m statefip puma using "$datadir\PUMA_CZ_crosswalks\puma_cz_cross_2000.dta"
+
+drop if puma==77777
 
 foreach i of varlist pop*{
 bysort cz90: egen cz_`i'=sum(county_prop_inpuma*`i')
@@ -250,9 +244,47 @@ by cz90: keep if _n==_N
 foreach i of varlist pop*{
 egen natl_`i'=sum(cz_`i')
 }
-drop cz_pop2010 natl_pop2010
-save "$datadir\working_data\2010census_pop.dta", replace
 
+drop cz_pop2000 natl_pop2000 _merge
+save "$datadir\working_data\2010census_pop.dta", replace
+*/
+
+
+////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////
+
+/*    Merge 1980, 1990, 2000, 2010 into Census Population Data1970-2010       */
+
+////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////
+
+*generate year for each year and get ready for append
+
+cd $datadir\working_data
+foreach i of numlist 1980 1990 2000 2010{
+use `i'census_pop.dta, clear
+gen year=`i'
+save `i'census_pop.dta, replace
+}
+
+use 1980census_pop.dta, clear
+append using 1990census_pop.dta
+append using 2000census_pop.dta
+append using 2010census_pop.dta
+
+////// variables that are not fully appended //////
+*1980: cntygp98 pop1980 cntygpp~1980 czpop1980 county_prop_incntygp 
+*1990+2000+2010: puma county_prop_inpuma
+*1990: pop1990 pumapop1990 czpop1990 
+*2000+2010: pop2000 pumapop2000 czpop2000
+///////////////////////////////////////////////////
+
+drop cntygp98 pop1980 cntygpp~1980 czpop1980 county_prop_incntygp 
+drop puma county_prop_inpuma
+drop pop1990 pumapop1990 czpop1990
+drop pop2000 pumapop2000 czpop2000
+
+save "$datadir\working_data\censuspop7010.dta", replace
 
 
 
