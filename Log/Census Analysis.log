@@ -1378,3 +1378,116 @@ reg_year~f_4 |      2,888    .0152355    .1225093          0          1
 e not found
 r(111);
 
+. do "C:\Users\cliu\AppData\Local\Temp\STDa8f8_000000.tmp"
+
+. //================================== Trade and Migration IPUMS ===========================
+> ==========|
+. //////////////////////////////////////////////////////////////////////////////////////////
+> //////////|
+> clear*
+
+. set more off, perm
+(set more preference recorded)
+
+. global datadir "F:\GitHub\LaborIIreplicatation\Data"
+
+. global outdir  "F:\GitHub\LaborIIreplicatation\Result"
+
+. 
+. //////////////////////////////////////////////////////////////////////////////////////////
+> //////////|
+> use "$datadir\working_data\censuspop7010.dta", clear
+
+. keep year czone cz*
+variable czone not found
+r(111);
+
+end of do-file
+
+r(111);
+
+. do "C:\Users\cliu\AppData\Local\Temp\STDa8f8_000000.tmp"
+
+. //================================== Trade and Migration IPUMS ===========================
+> ==========|
+. //////////////////////////////////////////////////////////////////////////////////////////
+> //////////|
+> clear*
+
+. set more off, perm
+(set more preference recorded)
+
+. global datadir "F:\GitHub\LaborIIreplicatation\Data"
+
+. global outdir  "F:\GitHub\LaborIIreplicatation\Result"
+
+. 
+. //////////////////////////////////////////////////////////////////////////////////////////
+> //////////|
+> use "$datadir\working_data\censuspop7010.dta", clear
+
+. keep year cz*
+
+. rename cz90 czone
+
+. 
+end of do-file
+
+. do "C:\Users\cliu\AppData\Local\Temp\STDa8f8_000000.tmp"
+
+. 
+. foreach pop in under_25 hisp asian amind black white{
+  2.                 gen `pop'share = (`pop'/totpop)*(year == 1990)
+  3.                 bys czone : egen `pop'share1990 = max(`pop'share)
+  4.                 drop `pop'share
+  5. }
+under_25 not found
+r(111);
+
+end of do-file
+
+r(111);
+
+. do "C:\Users\cliu\AppData\Local\Temp\STDa8f8_000000.tmp"
+
+. //================================== Trade and Migration IPUMS ===========================
+> ==========|
+. //////////////////////////////////////////////////////////////////////////////////////////
+> //////////|
+> clear*
+
+. set more off, perm
+(set more preference recorded)
+
+. global datadir "F:\GitHub\LaborIIreplicatation\Data"
+
+. global outdir  "F:\GitHub\LaborIIreplicatation\Result"
+
+. 
+. //////////////////////////////////////////////////////////////////////////////////////////
+> //////////|
+> use "$datadir\working_data\censuspop7010.dta", clear
+
+. keep year cz*
+
+. rename cz90 czone
+
+. 
+. foreach pop in cz_pop_under25 cz_pop_his cz_pop_asian cz_pop_amind cz_pop_black cz_pop_whi
+> te{
+  2.                 gen `pop'share = (`pop'/cz_pop)*(year == 1990)
+  3.                 bys czone : egen `pop'share1990 = max(`pop'share)
+  4.                 drop `pop'share
+  5. }
+
+. keep year czone *share1990
+
+. save "$datadir\working_data\Census_1990Share_Controls.dta", replace
+(note: file F:\GitHub\LaborIIreplicatation\Data\working_data\Census_1990Share_Controls.dta n
+> ot found)
+file F:\GitHub\LaborIIreplicatation\Data\working_data\Census_1990Share_Controls.dta saved
+
+. 
+end of do-file
+
+. exit, clear
