@@ -24,8 +24,7 @@ drop if year == 2007
 	rename cz_pop_1564 age1564
 	rename cz_pop totpop
 	rename cz_pop_1524 under_25
-	keep year czone totpop age1534 age1564 under_25 hisp asian amind black other white age* f_*_age* m_*_age* male female
-	rename other other
+*keep year czone totpop age1534 age1564 under_25 hisp asian amind black other white age* f_*_age* m_*_age* male female
 merge m:1 czone using "NTR GAP.dta"
 	keep if _merge == 3
 	drop if year == 1989 | year == 1999 | year == 2009
