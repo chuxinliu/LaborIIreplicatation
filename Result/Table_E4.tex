@@ -1,0 +1,31 @@
+\begin{table}[htbp]\centering
+\def\sym#1{\ifmmode^{#1}\else\(^{#1}\)\fi}
+\caption{Log CZ Population Changes}
+\begin{tabular}{l*{8}{c}}
+\toprule
+                    &\multicolumn{1}{c}{(1)}&\multicolumn{1}{c}{(2)}&\multicolumn{1}{c}{(3)}&\multicolumn{1}{c}{(4)}&\multicolumn{1}{c}{(5)}&\multicolumn{1}{c}{(6)}&\multicolumn{1}{c}{(7)}&\multicolumn{1}{c}{(8)}\\
+                    &\multicolumn{1}{c}{Change in Log Population, 15-64}&\multicolumn{1}{c}{Change in Log Population, 15-64}&\multicolumn{1}{c}{Change in Log Population, 15-64}&\multicolumn{1}{c}{Change in Log Population, 15-64}&\multicolumn{1}{c}{Change in Log Population, 15-34}&\multicolumn{1}{c}{Change in Log Population, 15-34}&\multicolumn{1}{c}{Change in Log Population, 15-34}&\multicolumn{1}{c}{Change in Log Population, 15-34}\\
+\midrule
+NTR Gap             &   -3.343***&   -3.455***&   -2.405***&   -2.147***&   -2.557***&   -3.073***&   -2.046***&   -1.398*  \\
+                    &  (0.712)   &  (0.566)   &  (0.540)   &  (0.568)   &  (0.969)   &  (0.786)   &  (0.700)   &  (0.750)   \\
+\addlinespace
+Lag 15-64 Change    &    0.591***&    0.574***&    0.572***&    0.563***&            &            &            &            \\
+                    &  (0.029)   &  (0.029)   &  (0.031)   &  (0.032)   &            &            &            &            \\
+\addlinespace
+ltotpop             &   -0.007** &   -0.005   &   -0.006*  &   -0.007*  &   -0.004   &   -0.001   &   -0.002   &   -0.003   \\
+                    &  (0.003)   &  (0.003)   &  (0.003)   &  (0.003)   &  (0.004)   &  (0.005)   &  (0.005)   &  (0.005)   \\
+\addlinespace
+ntr\_lpop            &    0.244***&    0.247***&    0.167***&    0.146***&    0.151** &    0.184***&    0.119** &    0.070   \\
+                    &  (0.056)   &  (0.045)   &  (0.045)   &  (0.047)   &  (0.075)   &  (0.060)   &  (0.056)   &  (0.060)   \\
+\addlinespace
+Lag 15-34 Change    &            &            &            &            &    0.385***&    0.359***&    0.361***&    0.352***\\
+                    &            &            &            &            &  (0.044)   &  (0.044)   &  (0.046)   &  (0.045)   \\
+\midrule
+Observations        &     1444   &     1444   &     1444   &     1322   &     1444   &     1444   &     1444   &     1322   \\
+\(R^{2}\)           &    0.730   &    0.740   &    0.746   &    0.750   &    0.625   &    0.637   &    0.645   &    0.654   \\
+Region-Year FE      &        Y   &        Y   &        Y   &        Y   &        Y   &        Y   &        Y   &        Y   \\
+\bottomrule
+\multicolumn{9}{l}{\footnotesize Standard errors in parentheses}\\
+\multicolumn{9}{l}{\footnotesize * p<.1, ** p<0.05, *** p<0.01}\\
+\end{tabular}
+\end{table}

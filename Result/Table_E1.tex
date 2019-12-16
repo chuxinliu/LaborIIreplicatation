@@ -1,0 +1,25 @@
+\begin{table}[htbp]\centering
+\def\sym#1{\ifmmode^{#1}\else\(^{#1}\)\fi}
+\caption{Log CZ Population Changes}
+\begin{tabular}{l*{6}{c}}
+\toprule
+                    &\multicolumn{1}{c}{(1)}&\multicolumn{1}{c}{(2)}&\multicolumn{1}{c}{(3)}&\multicolumn{1}{c}{(4)}&\multicolumn{1}{c}{(5)}&\multicolumn{1}{c}{(6)}\\
+                    &\multicolumn{1}{c}{Change in Log Population, 15-64}&\multicolumn{1}{c}{Change in Log Population, 15-64}&\multicolumn{1}{c}{Change in Log Population, 15-64}&\multicolumn{1}{c}{Change in Log Population, 15-34}&\multicolumn{1}{c}{Change in Log Population, 15-34}&\multicolumn{1}{c}{Change in Log Population, 15-34}\\
+\midrule
+NTR Gap             &   -0.264** &   -0.263** &   -0.248** &   -0.503***&   -0.505***&   -0.494***\\
+                    &  (0.114)   &  (0.115)   &  (0.112)   &  (0.170)   &  (0.168)   &  (0.159)   \\
+\addlinespace
+Lag 15-64 Change    &    0.529***&    0.530***&    0.569***&            &            &            \\
+                    &  (0.034)   &  (0.037)   &  (0.044)   &            &            &            \\
+\addlinespace
+Lag 15-34 Change    &            &            &            &    0.338***&    0.324***&    0.344***\\
+                    &            &            &            &  (0.047)   &  (0.052)   &  (0.050)   \\
+\midrule
+Observations        &     1322   &      961   &      961   &     1322   &      961   &      961   \\
+\(R^{2}\)           &    0.743   &    0.758   &    0.768   &    0.653   &    0.669   &    0.637   \\
+Region-Year FE      &        Y   &        Y   &        Y   &        Y   &        Y   &        Y   \\
+\bottomrule
+\multicolumn{7}{l}{\footnotesize Standard errors in parentheses}\\
+\multicolumn{7}{l}{\footnotesize * p<.1, ** p<0.05, *** p<0.01}\\
+\end{tabular}
+\end{table}
