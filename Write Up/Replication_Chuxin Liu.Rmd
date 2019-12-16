@@ -1,0 +1,35 @@
+---
+title: "Replication of “Import Competition and Internal Migration”, Review of Economcis and Statistics"
+author: "Chuxin Liu"
+date: "12/16/2019"
+output: pdf_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+1. Introduction
+
+2. Replication
+
+Figure 1 is the histogram of the independent variable of interest: NTR Gap. 
+
+![Figure 1](F:\GitHub\LaborIIreplicatation\Result\Figure_A1.png) 
+
+![Figure 2](F:\GitHub\LaborIIreplicatation\Result\popNTR.png) 
+
+
+
+3. Discussion of Difference Between Replication and the Original Paper
+
+
+
+4. Extension
+
+5. Conclusion
+
+
+\newpage
+
+# Reference

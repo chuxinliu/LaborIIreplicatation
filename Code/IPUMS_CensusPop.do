@@ -185,12 +185,11 @@ egen natl_`i'=sum(cz_`i')
 drop cz_pop2000 natl_pop2000 _merge
 save "$datadir\working_data\2000census_pop.dta", replace
 
-
 *4. 2010: keep only 2010
 use "$datadir\usa_00005.dta", clear
 tab year, m
 keep if year == 2011
-keep if multyear == 2010
+drop multyear sample serial cbserial hhwt 
 *create different population categories
 gen pop=1
 *gender
@@ -230,7 +229,7 @@ gen pop_5564_hssc=1 if age>=55 & age<=64 & educd>=62 & educd<=100
 gen pop_5564_cg=1 if age>=55 & age<=64 & educd>=101
 
 /* puma==77777 will not be matched due to insufficient size */
-/* crosswalk file is still puma_cz_cross_2000.dta according to Peter McHenry */
+/* crosswalk file is still puma_cz_cross_2000.dta according to Peter McHenry's website */
 
 collapse (sum) pop* [pw=perwt], by(statefip puma)
 merge 1:m statefip puma using "$datadir\PUMA_CZ_crosswalks\puma_cz_cross_2000.dta"
@@ -249,7 +248,6 @@ drop cz_pop2000 natl_pop2000 _merge
 save "$datadir\working_data\2010census_pop.dta", replace
 */
 
-
 ////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////
 
@@ -259,13 +257,6 @@ save "$datadir\working_data\2010census_pop.dta", replace
 ////////////////////////////////////////////////////////////////////////////////
 
 *generate year for each year and get ready for append
-
-cd $datadir\working_data
-foreach i of numlist 1980 1990 2000 2010{
-use `i'census_pop.dta, clear
-gen year=`i'
-save `i'census_pop.dta, replace
-}
 
 use 1980census_pop.dta, clear
 append using 1990census_pop.dta
@@ -285,13 +276,4 @@ drop pop1990 pumapop1990 czpop1990
 drop pop2000 pumapop2000 czpop2000
 
 save "$datadir\working_data\censuspop7010.dta", replace
-
-
-
-
-
-
-
-
-
 

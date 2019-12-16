@@ -8,8 +8,8 @@ Update: 12/15/2019, 2:15PM
 
 clear*
 set more off, perm
-global datadir "C:\Users\cl3852\Documents\GitHub\LaborIIreplicatation"
-global outdir  "C:\Users\cl3852\Documents\GitHub\LaborIIreplicatation\Result"
+global datadir "F:\GitHub\LaborIIreplicatation"
+global outdir  "F:\GitHub\LaborIIreplicatation\Result"
 
 ******************************************************************
 * 1. Compare total population within czone
@@ -34,17 +34,17 @@ tab _merge,m
 * drop 1970, drop Alaska and Hawaii
 drop if _merge!=3
 drop _merge
+gen diff = ltotpop - lcz_pop
 foreach year of numlist 1980 1990 2000 2010{
-kdensity ltotpop if year == `year', xtitle(log population) addplot((kdensity lcz_pop if year == `year')) title(KDensity Plot in `year') subtitle((blue: REStat; red: IPUMS)) legend(off)
+kdensity diff if year == `year',  xlabel(, labsize(vsmall)) xtitle(log population) title(KDensity Plot in `year') xscale(range(-0.3 0.2)) legend(off)
 graph save Graph $outdir\KDtotpop_`year'.gph, replace
 }
 graph combine $outdir\KDtotpop_1980.gph $outdir\KDtotpop_1990.gph $outdir\KDtotpop_2000.gph $outdir\KDtotpop_2010.gph
+graph export $outdir\KDtotpop_all.png, replace
 graph save Graph $outdir\KDtotpop_all.gph, replace
-* graph the difference
-gen diff_2010 = ltotpop - lcz_pop if year==2010
-gen diff_other = ltotpop - lcz_pop if year!=2010
-kdensity diff_2010, xtitle(log population) addplot((kdensity diff_other if diff_other!=0)) title(KDensity Plot of Difference) subtitle((blue: 2010; red: other years)) legend(off)
-graph save Graph $outdir\KDtotpop_diff.gph, replace
+/* graph the difference
+kdensity diff, xtitle(log population) title(KDensity Plot of Difference)
+graph export $outdir\KDtotpop_diff.gph, replace
 
 
 

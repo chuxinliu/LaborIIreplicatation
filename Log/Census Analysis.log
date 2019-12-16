@@ -1,8 +1,8 @@
---------------------------------------------------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------------------------------
       name:  <unnamed>
        log:  F:\GitHub\LaborIIreplicatation\Log\Census Analysis.log
   log type:  text
- opened on:  13 Dec 2019, 15:50:26
+ opened on:  16 Dec 2019, 12:24:44
 
 . 
 . ********************************************************************************
@@ -87,13 +87,13 @@
 (2,223 real changes made)
 (2,223 real changes made)
 (2,223 real changes made)
-(2,213 real changes made)
+(2,215 real changes made)
 (2,211 real changes made)
 (2,211 real changes made)
-(2,214 real changes made)
+(2,222 real changes made)
 (2,220 real changes made)
 (2,220 real changes made)
-(2,216 real changes made)
+(2,223 real changes made)
 (2,223 real changes made)
 (2,223 real changes made)
 
@@ -140,8 +140,8 @@
 
 . 
 . *All of the trade measures and controls turn on for 2000-2010 
-. foreach x of varlist ntr_gap ntr_kovak cap_labor skill_int fem_lf_share l_sh_popedu_c l_sh_routine33 l_task_outsource de
-> bt_to_income break_estimate mfg_share neighbor_fx l_sh_popfborn {
+. foreach x of varlist ntr_gap ntr_kovak cap_labor skill_int fem_lf_share l_sh_popedu_c l_sh_routine33 l_ta
+> sk_outsource debt_to_income break_estimate mfg_share neighbor_fx l_sh_popfborn {
   2. replace `x' = 0 if year != 2010
   3. }
 (2,163 real changes made)
@@ -165,8 +165,8 @@
 . *Creating a Census region dummy for New England, which is omitted 
 . gen reg_newe = 0
 
-. replace reg_newe = 1 if (reg_midatl + reg_encen + reg_wncen + reg_satl + reg_escen + reg_wscen + reg_mount + reg_pacif) 
-> == 0
+. replace reg_newe = 1 if (reg_midatl + reg_encen + reg_wncen + reg_satl + reg_escen + reg_wscen + reg_moun
+> t + reg_pacif) == 0
 (64 real changes made)
 
 . 
@@ -230,51 +230,51 @@
 . 
 . 
 . ********************************************************************************
-. *Table 1************************************************************************
+. *Table 1 (a) *******************************************************************
 . ********************************************************************************
 . eststo clear
 
-. eststo: reg cz_pop_1564_10_change ntr_gap l10_cz_pop_1564_10_change yeardum* reg_year_* [aw = weight_cz_pop_1564_90] if 
-> year == 2000 | year == 2010, cluster(czone)
+. eststo: reg cz_pop_1564_10_change ntr_gap l10_cz_pop_1564_10_change yeardum* reg_year_* [aw = weight_cz_p
+> op_1564_90] if year == 2000 | year == 2010, cluster(czone)
 (sum of wgt is 324,938,117.95715)
 note: yeardum1 omitted because of collinearity
 note: yeardum2 omitted because of collinearity
 note: yeardum4 omitted because of collinearity
 
 Linear regression                               Number of obs     =      1,444
-                                                F(19, 721)        =    6160.31
+                                                F(19, 721)        =     100.98
                                                 Prob > F          =     0.0000
-                                                R-squared         =     0.9920
-                                                Root MSE          =     .05099
+                                                R-squared         =     0.6781
+                                                Root MSE          =     .04985
 
                                              (Std. Err. adjusted for 722 clusters in czone)
 -------------------------------------------------------------------------------------------
                           |               Robust
     cz_pop_1564_10_change |      Coef.   Std. Err.      t    P>|t|     [95% Conf. Interval]
 --------------------------+----------------------------------------------------------------
-                  ntr_gap |  -.1727518   .1042964    -1.66   0.098    -.3775127     .032009
-l10_cz_pop_1564_10_change |    .545795   .0376614    14.49   0.000     .4718558    .6197341
+                  ntr_gap |  -.1859448   .0978287    -1.90   0.058    -.3780079    .0061184
+l10_cz_pop_1564_10_change |   .5521766   .0370491    14.90   0.000     .4794395    .6249136
                  yeardum1 |          0  (omitted)
                  yeardum2 |          0  (omitted)
-                 yeardum3 |   1.046279   .0181681    57.59   0.000      1.01061    1.081948
+                 yeardum3 |    -.05371   .0157395    -3.41   0.001    -.0846107   -.0228093
                  yeardum4 |          0  (omitted)
-    reg_year_reg_midatl_3 |   .0348116   .0093144     3.74   0.000      .016525    .0530982
-    reg_year_reg_midatl_4 |    -.00771   .0143565    -0.54   0.591    -.0358955    .0204755
-     reg_year_reg_encen_3 |   .0792048   .0094032     8.42   0.000     .0607439    .0976658
-     reg_year_reg_encen_4 |  -.0406021   .0122745    -3.31   0.001    -.0647001   -.0165041
-     reg_year_reg_wncen_3 |   .0967838   .0113832     8.50   0.000     .0744355     .119132
-     reg_year_reg_wncen_4 |  -.0236029   .0118939    -1.98   0.048    -.0469536   -.0002522
-      reg_year_reg_satl_3 |   .0748434   .0127061     5.89   0.000      .049898    .0997889
-      reg_year_reg_satl_4 |    .020044   .0140689     1.42   0.155    -.0075768    .0476649
-     reg_year_reg_escen_3 |   .1048095   .0087745    11.94   0.000     .0875829    .1220362
-     reg_year_reg_escen_4 |  -.0220169   .0134181    -1.64   0.101    -.0483602    .0043264
-     reg_year_reg_wscen_3 |   .1094725   .0097756    11.20   0.000     .0902804    .1286646
-     reg_year_reg_wscen_4 |  -.0010729   .0257381    -0.04   0.967    -.0516034    .0494577
-     reg_year_reg_mount_3 |   .2077669   .0146107    14.22   0.000     .1790824    .2364515
-     reg_year_reg_mount_4 |  -.0238529   .0164464    -1.45   0.147    -.0561414    .0084356
-     reg_year_reg_pacif_3 |   .0311891   .0262302     1.19   0.235    -.0203077    .0826858
-     reg_year_reg_pacif_4 |   .0091928   .0185793     0.49   0.621    -.0272831    .0456687
-                    _cons |  -1.046908   .0132372   -79.09   0.000    -1.072896    -1.02092
+    reg_year_reg_midatl_3 |   .0351636   .0092949     3.78   0.000     .0169152    .0534119
+    reg_year_reg_midatl_4 |  -.0114213   .0120313    -0.95   0.343    -.0350419    .0121994
+     reg_year_reg_encen_3 |   .0796951   .0093742     8.50   0.000      .061291    .0980991
+     reg_year_reg_encen_4 |  -.0423296   .0101163    -4.18   0.000    -.0621906   -.0224686
+     reg_year_reg_wncen_3 |   .0971594   .0114222     8.51   0.000     .0747346    .1195842
+     reg_year_reg_wncen_4 |  -.0260316   .0098561    -2.64   0.008    -.0453816   -.0066815
+      reg_year_reg_satl_3 |    .074236   .0125683     5.91   0.000     .0495611    .0989108
+      reg_year_reg_satl_4 |   .0127387   .0117722     1.08   0.280    -.0103732    .0358505
+     reg_year_reg_escen_3 |   .1050048   .0087502    12.00   0.000     .0878259    .1221837
+     reg_year_reg_escen_4 |  -.0267033   .0115667    -2.31   0.021    -.0494118   -.0039949
+     reg_year_reg_wscen_3 |   .1091471   .0097048    11.25   0.000     .0900941       .1282
+     reg_year_reg_wscen_4 |  -.0093641   .0243126    -0.39   0.700     -.057096    .0383678
+     reg_year_reg_mount_3 |   .2071514    .014627    14.16   0.000     .1784348    .2358681
+     reg_year_reg_mount_4 |  -.0268849   .0153674    -1.75   0.081    -.0570551    .0032853
+     reg_year_reg_pacif_3 |   .0304187   .0262421     1.16   0.247    -.0211014    .0819389
+     reg_year_reg_pacif_4 |   .0045578   .0177124     0.26   0.797    -.0302162    .0393318
+                    _cons |   .0525829   .0110455     4.76   0.000     .0308977    .0742682
 -------------------------------------------------------------------------------------------
 (est1 stored)
 
@@ -283,52 +283,52 @@ l10_cz_pop_1564_10_change |    .545795   .0376614    14.49   0.000     .4718558 
 added macro:
                 e(YFE) : "Y"
 
-. eststo: reg cz_pop_1564_10_change ntr_gap l10_cz_pop_1564_10_change `demo_controls' yeardum* reg_year_*[aw = weight_cz_p
-> op_1564_90] if year == 2000 | year == 2010, cluster(czone)
+. eststo: reg cz_pop_1564_10_change ntr_gap l10_cz_pop_1564_10_change `demo_controls' yeardum* reg_year_*[a
+> w = weight_cz_pop_1564_90] if year == 2000 | year == 2010, cluster(czone)
 (sum of wgt is 324,938,117.95715)
 note: yeardum1 omitted because of collinearity
 note: yeardum2 omitted because of collinearity
 note: yeardum4 omitted because of collinearity
 
 Linear regression                               Number of obs     =      1,444
-                                                F(24, 721)        =    5179.35
+                                                F(24, 721)        =      77.51
                                                 Prob > F          =     0.0000
-                                                R-squared         =     0.9924
-                                                Root MSE          =     .04977
+                                                R-squared         =     0.6928
+                                                Root MSE          =     .04878
 
                                              (Std. Err. adjusted for 722 clusters in czone)
 -------------------------------------------------------------------------------------------
                           |               Robust
     cz_pop_1564_10_change |      Coef.   Std. Err.      t    P>|t|     [95% Conf. Interval]
 --------------------------+----------------------------------------------------------------
-                  ntr_gap |  -.2475348   .0868485    -2.85   0.004    -.4180409   -.0770286
-l10_cz_pop_1564_10_change |    .537355   .0343747    15.63   0.000     .4698686    .6048413
-           hispanic_share |   .0873283   .0474792     1.84   0.066    -.0058857    .1805423
-            under25_share |   .3544823    .121662     2.91   0.004     .1156282    .5933364
-              black_share |  -.1329076   .0693277    -1.92   0.056     -.269016    .0032007
-              amind_share |  -.2065098   .0608398    -3.39   0.001    -.3259541   -.0870656
-              asian_share |   .0454848   .2354591     0.19   0.847    -.4167826    .5077521
+                  ntr_gap |  -.2511759   .0808847    -3.11   0.002    -.4099736   -.0923783
+l10_cz_pop_1564_10_change |   .5446758   .0338801    16.08   0.000     .4781604    .6111913
+           hispanic_share |   .0827714   .0456924     1.81   0.070    -.0069347    .1724774
+            under25_share |     .33553   .1144769     2.93   0.003     .1107821    .5602778
+              black_share |  -.1166504   .0669096    -1.74   0.082    -.2480113    .0147105
+              amind_share |  -.2061057   .0563019    -3.66   0.000     -.316641   -.0955705
+              asian_share |   .0581059   .2367289     0.25   0.806    -.4066544    .5228662
                  yeardum1 |          0  (omitted)
                  yeardum2 |          0  (omitted)
-                 yeardum3 |   1.160595   .0478888    24.24   0.000     1.066577    1.254613
+                 yeardum3 |   .0555214   .0443091     1.25   0.211    -.0314688    .1425117
                  yeardum4 |          0  (omitted)
-    reg_year_reg_midatl_3 |   .0343461   .0093052     3.69   0.000     .0160775    .0526146
-    reg_year_reg_midatl_4 |   .0002006    .015679     0.01   0.990    -.0305814    .0309825
-     reg_year_reg_encen_3 |   .0785565   .0094269     8.33   0.000     .0600491     .097064
-     reg_year_reg_encen_4 |  -.0383159   .0139266    -2.75   0.006    -.0656574   -.0109744
-     reg_year_reg_wncen_3 |    .096287   .0113222     8.50   0.000     .0740586    .1185153
-     reg_year_reg_wncen_4 |  -.0264139   .0141374    -1.87   0.062    -.0541693    .0013414
-      reg_year_reg_satl_3 |   .0756469   .0126418     5.98   0.000     .0508276    .1004661
-      reg_year_reg_satl_4 |   .0396543    .019047     2.08   0.038       .00226    .0770485
-     reg_year_reg_escen_3 |   .1045513   .0088093    11.87   0.000     .0872564    .1218462
-     reg_year_reg_escen_4 |  -.0060255    .017877    -0.34   0.736    -.0411227    .0290716
-     reg_year_reg_wscen_3 |   .1099029   .0098253    11.19   0.000     .0906133    .1291924
-     reg_year_reg_wscen_4 |  -.0132982   .0241173    -0.55   0.582    -.0606468    .0340503
-     reg_year_reg_mount_3 |    .208581   .0145292    14.36   0.000     .1800564    .2371056
-     reg_year_reg_mount_4 |  -.0425274   .0186274    -2.28   0.023    -.0790978   -.0059569
-     reg_year_reg_pacif_3 |   .0322078    .026293     1.22   0.221    -.0194121    .0838278
-     reg_year_reg_pacif_4 |  -.0137303    .019587    -0.70   0.484    -.0521846     .024724
-                    _cons |  -1.160565   .0455989   -25.45   0.000    -1.250088   -1.071043
+    reg_year_reg_midatl_3 |   .0347499   .0092822     3.74   0.000     .0165265    .0529732
+    reg_year_reg_midatl_4 |  -.0048667   .0135167    -0.36   0.719    -.0314035    .0216701
+     reg_year_reg_encen_3 |   .0791189    .009389     8.43   0.000     .0606857     .097552
+     reg_year_reg_encen_4 |   -.040747   .0117314    -3.47   0.001    -.0637788   -.0177152
+     reg_year_reg_wncen_3 |   .0967179   .0113646     8.51   0.000     .0744062    .1190296
+     reg_year_reg_wncen_4 |  -.0285345   .0120497    -2.37   0.018    -.0521911   -.0048779
+      reg_year_reg_satl_3 |     .07495   .0125032     5.99   0.000     .0504029     .099497
+      reg_year_reg_satl_4 |   .0298766   .0167483     1.78   0.075    -.0030046    .0627579
+     reg_year_reg_escen_3 |   .1047753   .0087801    11.93   0.000     .0875376    .1220129
+     reg_year_reg_escen_4 |  -.0128697   .0159515    -0.81   0.420    -.0441866    .0184472
+     reg_year_reg_wscen_3 |   .1095296   .0097445    11.24   0.000     .0903986    .1286605
+     reg_year_reg_wscen_4 |  -.0216815   .0227178    -0.95   0.340    -.0662824    .0229195
+     reg_year_reg_mount_3 |   .2078749   .0145507    14.29   0.000      .179308    .2364417
+     reg_year_reg_mount_4 |  -.0440007   .0176202    -2.50   0.013    -.0785937   -.0094076
+     reg_year_reg_pacif_3 |   .0313241   .0263143     1.19   0.234    -.0203376    .0829859
+     reg_year_reg_pacif_4 |  -.0182182   .0179082    -1.02   0.309    -.0533767    .0169402
+                    _cons |  -.0560629   .0423499    -1.32   0.186    -.1392068    .0270809
 -------------------------------------------------------------------------------------------
 (est2 stored)
 
@@ -337,60 +337,60 @@ l10_cz_pop_1564_10_change |    .537355   .0343747    15.63   0.000     .4698686 
 added macro:
                 e(YFE) : "Y"
 
-. eststo: reg cz_pop_1564_10_change ntr_gap l10_cz_pop_1564_10_change `demo_controls' neighbor_fx l_sh_routine33 l_task_ou
-> tsource cap_labor skill_int fem_lf_share l_sh_popedu_c yeardum* reg_year_* [aw = weight_cz_pop_1564_90] if year == 2000 
-> | year == 2010, cluster(czone)
+. eststo: reg cz_pop_1564_10_change ntr_gap l10_cz_pop_1564_10_change `demo_controls' neighbor_fx l_sh_rout
+> ine33 l_task_outsource cap_labor skill_int fem_lf_share l_sh_popedu_c yeardum* reg_year_* [aw = weight_cz
+> _pop_1564_90] if year == 2000 | year == 2010, cluster(czone)
 (sum of wgt is 324,938,117.95715)
 note: yeardum1 omitted because of collinearity
 note: yeardum2 omitted because of collinearity
 note: yeardum4 omitted because of collinearity
 
 Linear regression                               Number of obs     =      1,444
-                                                F(31, 721)        =    4547.46
+                                                F(31, 721)        =      77.83
                                                 Prob > F          =     0.0000
-                                                R-squared         =     0.9927
-                                                Root MSE          =     .04892
+                                                R-squared         =     0.7078
+                                                Root MSE          =     .04769
 
                                              (Std. Err. adjusted for 722 clusters in czone)
 -------------------------------------------------------------------------------------------
                           |               Robust
     cz_pop_1564_10_change |      Coef.   Std. Err.      t    P>|t|     [95% Conf. Interval]
 --------------------------+----------------------------------------------------------------
-                  ntr_gap |  -.1583816   .1553458    -1.02   0.308    -.4633657    .1466025
-l10_cz_pop_1564_10_change |   .5213321   .0356321    14.63   0.000     .4513769    .5912872
-           hispanic_share |   .0743539   .0502902     1.48   0.140    -.0243789    .1730867
-            under25_share |    .413946   .1233534     3.36   0.001     .1717713    .6561207
-              black_share |   -.155131   .0564466    -2.75   0.006    -.2659503   -.0443117
-              amind_share |  -.1153397   .0688567    -1.68   0.094    -.2505234    .0198439
-              asian_share |  -.4448871   .1879763    -2.37   0.018    -.8139335   -.0758407
-              neighbor_fx |   .0168932   .3350624     0.05   0.960    -.6409214    .6747077
-           l_sh_routine33 |   .0033183   .0019141     1.73   0.083    -.0004397    .0070762
-         l_task_outsource |   .0103566   .0146131     0.71   0.479    -.0183327    .0390459
-                cap_labor |   .0011186   .0132929     0.08   0.933    -.0249788    .0272159
-                skill_int |   .0926972   .0641023     1.45   0.149    -.0331523    .2185467
-             fem_lf_share |  -.4063616   .3096757    -1.31   0.190    -1.014335    .2016123
-            l_sh_popedu_c |   .0009275   .0009316     1.00   0.320    -.0009015    .0027564
+                  ntr_gap |  -.1904142   .1431101    -1.33   0.184    -.4713765    .0905482
+l10_cz_pop_1564_10_change |   .5243849    .034786    15.07   0.000      .456091    .5926787
+           hispanic_share |   .0669859   .0474091     1.41   0.158    -.0260905    .1600624
+            under25_share |   .4124503   .1178162     3.50   0.000     .1811465    .6437541
+              black_share |  -.1504587   .0539467    -2.79   0.005      -.25637   -.0445473
+              amind_share |  -.1079279    .064283    -1.68   0.094    -.2341322    .0182763
+              asian_share |  -.4839615   .1735889    -2.79   0.005    -.8247616   -.1431613
+              neighbor_fx |   .0826567    .304925     0.27   0.786    -.5159903    .6813037
+           l_sh_routine33 |   .0035078    .001765     1.99   0.047     .0000425     .006973
+         l_task_outsource |    .014827   .0133123     1.11   0.266    -.0113085    .0409624
+                cap_labor |   .0004378   .0128284     0.03   0.973    -.0247476    .0256232
+                skill_int |     .09619   .0594591     1.62   0.106    -.0205437    .2129237
+             fem_lf_share |   -.374144   .2927777    -1.28   0.202    -.9489426    .2006546
+            l_sh_popedu_c |   .0008495   .0008945     0.95   0.343    -.0009066    .0026055
                  yeardum1 |          0  (omitted)
                  yeardum2 |          0  (omitted)
-                 yeardum3 |   1.186059   .1718267     6.90   0.000      .848719      1.5234
+                 yeardum3 |   .1045194   .1619634     0.65   0.519    -.2134569    .4224957
                  yeardum4 |          0  (omitted)
-    reg_year_reg_midatl_3 |   .0334623   .0094358     3.55   0.000     .0149373    .0519873
-    reg_year_reg_midatl_4 |   .0102083   .0147774     0.69   0.490    -.0188035    .0392201
-     reg_year_reg_encen_3 |   .0773257   .0095432     8.10   0.000     .0585898    .0960615
-     reg_year_reg_encen_4 |  -.0351621   .0147589    -2.38   0.017    -.0641376   -.0061866
-     reg_year_reg_wncen_3 |   .0953438   .0112723     8.46   0.000     .0732134    .1174743
-     reg_year_reg_wncen_4 |  -.0200543   .0127016    -1.58   0.115    -.0449908    .0048822
-      reg_year_reg_satl_3 |   .0771721   .0126742     6.09   0.000     .0522894    .1020548
-      reg_year_reg_satl_4 |   .0562697   .0186333     3.02   0.003     .0196876    .0928517
-     reg_year_reg_escen_3 |    .104061   .0089244    11.66   0.000       .08654     .121582
-     reg_year_reg_escen_4 |   .0135448   .0202019     0.67   0.503    -.0261168    .0532064
-     reg_year_reg_wscen_3 |   .1107199   .0099234    11.16   0.000     .0912377    .1302022
-     reg_year_reg_wscen_4 |  -.0029047   .0206855    -0.14   0.888    -.0435157    .0377062
-     reg_year_reg_mount_3 |   .2101264   .0144427    14.55   0.000     .1817716    .2384812
-     reg_year_reg_mount_4 |  -.0442354   .0202513    -2.18   0.029    -.0839938   -.0044769
-     reg_year_reg_pacif_3 |    .034142   .0262832     1.30   0.194    -.0174589    .0857428
-     reg_year_reg_pacif_4 |   .0078775   .0227906     0.35   0.730    -.0368664    .0526213
-                    _cons |  -1.184778   .1699119    -6.97   0.000     -1.51836   -.8511974
+    reg_year_reg_midatl_3 |   .0336307   .0094215     3.57   0.000     .0151339    .0521275
+    reg_year_reg_midatl_4 |   .0059131   .0126651     0.47   0.641    -.0189517    .0307779
+     reg_year_reg_encen_3 |   .0775602   .0095173     8.15   0.000     .0588754     .096245
+     reg_year_reg_encen_4 |  -.0376732   .0123966    -3.04   0.002     -.062011   -.0133355
+     reg_year_reg_wncen_3 |   .0955235   .0112853     8.46   0.000     .0733676    .1176795
+     reg_year_reg_wncen_4 |  -.0214343   .0101338    -2.12   0.035    -.0413296    -.001539
+      reg_year_reg_satl_3 |   .0768815   .0126381     6.08   0.000     .0520696    .1016935
+      reg_year_reg_satl_4 |   .0479044   .0161061     2.97   0.003      .016284    .0795247
+     reg_year_reg_escen_3 |   .1041544    .008911    11.69   0.000     .0866597    .1216491
+     reg_year_reg_escen_4 |   .0070974   .0176023     0.40   0.687    -.0274605    .0416552
+     reg_year_reg_wscen_3 |   .1105643   .0098737    11.20   0.000     .0911795     .129949
+     reg_year_reg_wscen_4 |  -.0085953   .0186066    -0.46   0.644    -.0451249    .0279342
+     reg_year_reg_mount_3 |   .2098319    .014488    14.48   0.000     .1813881    .2382757
+     reg_year_reg_mount_4 |  -.0426831   .0188512    -2.26   0.024    -.0796929   -.0056733
+     reg_year_reg_pacif_3 |   .0337735   .0262652     1.29   0.199    -.0177919    .0853388
+     reg_year_reg_pacif_4 |   .0092603   .0209714     0.44   0.659     -.031912    .0504326
+                    _cons |  -.1034768   .1602939    -0.65   0.519    -.4181754    .2112217
 -------------------------------------------------------------------------------------------
 (est3 stored)
 
@@ -399,62 +399,62 @@ l10_cz_pop_1564_10_change |   .5213321   .0356321    14.63   0.000     .4513769 
 added macro:
                 e(YFE) : "Y"
 
-. eststo: reg cz_pop_1564_10_change ntr_gap l10_cz_pop_1564_10_change `demo_controls' debt_to_income break_estimate  neigh
-> bor_fx l_sh_routine33 l_task_outsource cap_labor skill_int fem_lf_share l_sh_popedu_c yeardum* reg_year_* [aw = weight_c
-> z_pop_1564_90] if year == 2000 | year == 2010, cluster(czone)
+. eststo: reg cz_pop_1564_10_change ntr_gap l10_cz_pop_1564_10_change `demo_controls' debt_to_income break_
+> estimate  neighbor_fx l_sh_routine33 l_task_outsource cap_labor skill_int fem_lf_share l_sh_popedu_c year
+> dum* reg_year_* [aw = weight_cz_pop_1564_90] if year == 2000 | year == 2010, cluster(czone)
 (sum of wgt is 323,973,988.53961)
 note: yeardum1 omitted because of collinearity
 note: yeardum2 omitted because of collinearity
 note: yeardum4 omitted because of collinearity
 
 Linear regression                               Number of obs     =      1,322
-                                                F(33, 721)        =    4257.93
+                                                F(33, 721)        =      78.75
                                                 Prob > F          =     0.0000
-                                                R-squared         =     0.9928
-                                                Root MSE          =     .04871
+                                                R-squared         =     0.7107
+                                                Root MSE          =      .0475
 
                                              (Std. Err. adjusted for 722 clusters in czone)
 -------------------------------------------------------------------------------------------
                           |               Robust
     cz_pop_1564_10_change |      Coef.   Std. Err.      t    P>|t|     [95% Conf. Interval]
 --------------------------+----------------------------------------------------------------
-                  ntr_gap |  -.1514331   .1475852    -1.03   0.305    -.4411812     .138315
-l10_cz_pop_1564_10_change |   .5149087   .0380941    13.52   0.000     .4401201    .5896973
-           hispanic_share |   .0686817   .0537182     1.28   0.201     -.036781    .1741445
-            under25_share |    .425161   .1304022     3.26   0.001     .1691475    .6811745
-              black_share |  -.1615368   .0528602    -3.06   0.002    -.2653151   -.0577584
-              amind_share |  -.1236251   .0675224    -1.83   0.068    -.2561891    .0089389
-              asian_share |  -.4334011    .184863    -2.34   0.019    -.7963351    -.070467
-           debt_to_income |   .0207076    .031678     0.65   0.514    -.0414847    .0828998
-           break_estimate |   .1520234   .0690294     2.20   0.028     .0165008     .287546
-              neighbor_fx |   .1914674   .3132059     0.61   0.541     -.423437    .8063719
-           l_sh_routine33 |   .0029696   .0020103     1.48   0.140    -.0009772    .0069164
-         l_task_outsource |   .0125991   .0149867     0.84   0.401    -.0168237     .042022
-                cap_labor |   .0015648   .0144766     0.11   0.914    -.0268566    .0299862
-                skill_int |    .097535   .0661152     1.48   0.141    -.0322664    .2273363
-             fem_lf_share |  -.4193274   .3570538    -1.17   0.241    -1.120317     .281662
-            l_sh_popedu_c |   .0009232   .0010524     0.88   0.381    -.0011429    .0029892
+                  ntr_gap |  -.1862631   .1350347    -1.38   0.168    -.4513713    .0788452
+l10_cz_pop_1564_10_change |   .5186863   .0374181    13.86   0.000     .4452247    .5921478
+           hispanic_share |   .0617565   .0509056     1.21   0.225    -.0381844    .1616975
+            under25_share |   .4218758   .1247091     3.38   0.001     .1770395    .6667122
+              black_share |  -.1564209   .0503386    -3.11   0.002    -.2552487   -.0575931
+              amind_share |  -.1133574   .0640956    -1.77   0.077    -.2391938    .0124789
+              asian_share |  -.4785689   .1693143    -2.83   0.005    -.8109769   -.1461609
+           debt_to_income |   .0177904   .0305807     0.58   0.561    -.0422475    .0778283
+           break_estimate |   .1442416   .0618161     2.33   0.020     .0228805    .2656027
+              neighbor_fx |   .2538767   .2879178     0.88   0.378    -.3113807    .8191341
+           l_sh_routine33 |   .0032393   .0018268     1.77   0.077    -.0003473    .0068258
+         l_task_outsource |    .017021   .0136333     1.25   0.212    -.0097447    .0437866
+                cap_labor |    .000719   .0139696     0.05   0.959     -.026707     .028145
+                skill_int |   .1037621   .0603256     1.72   0.086    -.0146727    .2221969
+             fem_lf_share |  -.3923941   .3393175    -1.16   0.248    -1.058562    .2737743
+            l_sh_popedu_c |   .0008411   .0010133     0.83   0.407    -.0011483    .0028306
                  yeardum1 |          0  (omitted)
                  yeardum2 |          0  (omitted)
-                 yeardum3 |   1.204897   .2020138     5.96   0.000     .8082915    1.601503
+                 yeardum3 |   .1196092   .1925845     0.62   0.535    -.2584841    .4977026
                  yeardum4 |          0  (omitted)
-    reg_year_reg_midatl_3 |    .033108   .0095023     3.48   0.001     .0144527    .0517634
-    reg_year_reg_midatl_4 |    .002433   .0130379     0.19   0.852    -.0231637    .0280297
-     reg_year_reg_encen_3 |   .0768323   .0096548     7.96   0.000     .0578774    .0957871
-     reg_year_reg_encen_4 |  -.0418775    .013729    -3.05   0.002    -.0688311    -.014924
-     reg_year_reg_wncen_3 |   .0949658   .0112927     8.41   0.000     .0727953    .1171362
-     reg_year_reg_wncen_4 |  -.0240797   .0110125    -2.19   0.029    -.0457001   -.0024593
-      reg_year_reg_satl_3 |   .0777836   .0127641     6.09   0.000     .0527243    .1028428
-      reg_year_reg_satl_4 |   .0345382   .0228707     1.51   0.131    -.0103629    .0794393
-     reg_year_reg_escen_3 |   .1038644   .0089881    11.56   0.000     .0862184    .1215105
-     reg_year_reg_escen_4 |  -.0028822   .0209959    -0.14   0.891    -.0441027    .0383383
-     reg_year_reg_wscen_3 |   .1110475   .0100338    11.07   0.000     .0913486    .1307464
-     reg_year_reg_wscen_4 |  -.0074449   .0206833    -0.36   0.719    -.0480516    .0331619
-     reg_year_reg_mount_3 |   .2107459   .0146252    14.41   0.000     .1820329    .2394589
-     reg_year_reg_mount_4 |  -.0648044   .0174007    -3.72   0.000    -.0989666   -.0306423
-     reg_year_reg_pacif_3 |   .0349173   .0263408     1.33   0.185    -.0167964    .0866311
-     reg_year_reg_pacif_4 |  -.0164628   .0229688    -0.72   0.474    -.0615564    .0286309
-                    _cons |  -1.203115   .2000257    -6.01   0.000    -1.595817   -.8104122
+    reg_year_reg_midatl_3 |   .0333164   .0094908     3.51   0.000     .0146836    .0519492
+    reg_year_reg_midatl_4 |  -.0017572   .0110557    -0.16   0.874    -.0234624     .019948
+     reg_year_reg_encen_3 |   .0771225   .0096284     8.01   0.000     .0582193    .0960256
+     reg_year_reg_encen_4 |  -.0440512   .0117234    -3.76   0.000    -.0670673   -.0210352
+     reg_year_reg_wncen_3 |   .0951881     .01131     8.42   0.000     .0729836    .1173926
+     reg_year_reg_wncen_4 |  -.0254286   .0086862    -2.93   0.004     -.042482   -.0083753
+      reg_year_reg_satl_3 |    .077424   .0127271     6.08   0.000     .0524375    .1024105
+      reg_year_reg_satl_4 |   .0277396   .0207603     1.34   0.182    -.0130182    .0684975
+     reg_year_reg_escen_3 |     .10398   .0089711    11.59   0.000     .0863674    .1215926
+     reg_year_reg_escen_4 |  -.0085089   .0186317    -0.46   0.648    -.0450876    .0280699
+     reg_year_reg_wscen_3 |   .1108548   .0099735    11.11   0.000     .0912743    .1304354
+     reg_year_reg_wscen_4 |  -.0130586   .0189013    -0.69   0.490    -.0501668    .0240497
+     reg_year_reg_mount_3 |   .2103816   .0146466    14.36   0.000     .1816264    .2391367
+     reg_year_reg_mount_4 |  -.0615869   .0154509    -3.99   0.000    -.0919211   -.0312527
+     reg_year_reg_pacif_3 |   .0344613   .0263105     1.31   0.191     -.017193    .0861156
+     reg_year_reg_pacif_4 |  -.0124554   .0205105    -0.61   0.544    -.0527228     .027812
+                    _cons |  -.1181218   .1908242    -0.62   0.536    -.4927592    .2565156
 -------------------------------------------------------------------------------------------
 (est4 stored)
 
@@ -463,246 +463,253 @@ l10_cz_pop_1564_10_change |   .5149087   .0380941    13.52   0.000     .4401201 
 added macro:
                 e(YFE) : "Y"
 
-. eststo: reg cz_pop_1534_10_change ntr_gap l10_cz_pop_1534_10_change yeardum* reg_year_* [aw = weight_cz_pop_1534_90] if 
-> year == 2000 | year == 2010, cluster(czone)
+. esttab using "$outdir/Table_1a", replace se starlevels(* .1 ** 0.05 *** 0.01) r2 label ///
+>         compress title("Import Competition and 10-year Changes in Log CZ Population (aged 15-64), Census"
+> ) booktabs b(3) se(3) varwidth(20) ///
+>         keep(ntr_gap `demo_controls' l10_cz_pop_* debt_to_income break_estimate neighbor_fx l_sh_routine3
+> 3 l_task_outsource cap_labor skill_int l_sh_popedu_c fem_lf_share) scalars("YFE Region-Year FE")
+(output written to F:\GitHub\LaborIIreplicatation\Result/Table_1a.tex)
+
+. eststo clear
+
+. 
+. eststo clear
+
+. eststo: reg cz_pop_1534_10_change ntr_gap l10_cz_pop_1534_10_change yeardum* reg_year_* [aw = weight_cz_p
+> op_1534_90] if year == 2000 | year == 2010, cluster(czone)
 (sum of wgt is 158,056,378.00903)
 note: yeardum1 omitted because of collinearity
 note: yeardum2 omitted because of collinearity
 note: yeardum4 omitted because of collinearity
 
 Linear regression                               Number of obs     =      1,444
-                                                F(19, 721)        =    2052.92
+                                                F(19, 721)        =      91.13
                                                 Prob > F          =     0.0000
-                                                R-squared         =     0.9812
-                                                Root MSE          =     .07119
+                                                R-squared         =     0.6066
+                                                Root MSE          =     .06936
 
                                              (Std. Err. adjusted for 722 clusters in czone)
 -------------------------------------------------------------------------------------------
                           |               Robust
     cz_pop_1534_10_change |      Coef.   Std. Err.      t    P>|t|     [95% Conf. Interval]
 --------------------------+----------------------------------------------------------------
-                  ntr_gap |  -.6028363   .1328994    -4.54   0.000    -.8637524   -.3419203
-l10_cz_pop_1534_10_change |   .3528046   .0469976     7.51   0.000     .2605362    .4450731
+                  ntr_gap |  -.5801487   .1259243    -4.61   0.000    -.8273708   -.3329266
+l10_cz_pop_1534_10_change |   .3525908   .0462365     7.63   0.000     .2618165     .443365
                  yeardum1 |          0  (omitted)
                  yeardum2 |          0  (omitted)
-                 yeardum3 |   .8059567   .0237317    33.96   0.000     .7593652    .8525482
+                 yeardum3 |  -.2945472   .0235749   -12.49   0.000    -.3408308   -.2482636
                  yeardum4 |          0  (omitted)
-    reg_year_reg_midatl_3 |   .0748678   .0223243     3.35   0.001     .0310393    .1186963
-    reg_year_reg_midatl_4 |  -.0121473   .0161185    -0.75   0.451    -.0437922    .0194975
-     reg_year_reg_encen_3 |   .1377928   .0159822     8.62   0.000     .1064156    .1691699
-     reg_year_reg_encen_4 |  -.0654959   .0154893    -4.23   0.000    -.0959054   -.0350865
-     reg_year_reg_wncen_3 |   .1621697   .0171877     9.44   0.000     .1284258    .1959137
-     reg_year_reg_wncen_4 |  -.0323847   .0143656    -2.25   0.024    -.0605882   -.0041812
-      reg_year_reg_satl_3 |   .1478533   .0204427     7.23   0.000      .107719    .1879877
-      reg_year_reg_satl_4 |   .0268259   .0180261     1.49   0.137     -.008564    .0622158
-     reg_year_reg_escen_3 |   .1790785   .0150649    11.89   0.000     .1495023    .2086547
-     reg_year_reg_escen_4 |  -.0384968   .0173513    -2.22   0.027    -.0725619   -.0044318
-     reg_year_reg_wscen_3 |   .2127499   .0164833    12.91   0.000     .1803888    .2451109
-     reg_year_reg_wscen_4 |  -.0095485   .0307397    -0.31   0.756    -.0698984    .0508014
-     reg_year_reg_mount_3 |    .349757    .022543    15.52   0.000     .3054992    .3940148
-     reg_year_reg_mount_4 |  -.0212996    .022861    -0.93   0.352    -.0661818    .0235825
-     reg_year_reg_pacif_3 |   .1260972   .0343176     3.67   0.000     .0587229    .1934715
-     reg_year_reg_pacif_4 |   .0082156   .0200987     0.41   0.683    -.0312433    .0476745
-                    _cons |  -.9751263   .0155656   -62.65   0.000    -1.005686   -.9445669
+    reg_year_reg_midatl_3 |   .0748584   .0223159     3.35   0.001     .0310465    .1186703
+    reg_year_reg_midatl_4 |  -.0183848   .0162383    -1.13   0.258    -.0502648    .0134953
+     reg_year_reg_encen_3 |   .1377709    .015961     8.63   0.000     .1064352    .1691065
+     reg_year_reg_encen_4 |  -.0693442   .0151737    -4.57   0.000    -.0991341   -.0395543
+     reg_year_reg_wncen_3 |   .1621499   .0171453     9.46   0.000     .1284892    .1958106
+     reg_year_reg_wncen_4 |  -.0302873   .0133558    -2.27   0.024    -.0565082   -.0040664
+      reg_year_reg_satl_3 |   .1478708   .0204113     7.24   0.000     .1077982    .1879435
+      reg_year_reg_satl_4 |   .0205988   .0169885     1.21   0.226     -.012754    .0539517
+     reg_year_reg_escen_3 |   .1790654   .0150625    11.89   0.000     .1494937     .208637
+     reg_year_reg_escen_4 |  -.0394291   .0165791    -2.38   0.018    -.0719783     -.00688
+     reg_year_reg_wscen_3 |   .2127566   .0164793    12.91   0.000     .1804034    .2451097
+     reg_year_reg_wscen_4 |  -.0166108   .0300187    -0.55   0.580    -.0755453    .0423237
+     reg_year_reg_mount_3 |   .3497643   .0225553    15.51   0.000     .3054824    .3940463
+     reg_year_reg_mount_4 |  -.0191476   .0223183    -0.86   0.391    -.0629642     .024669
+     reg_year_reg_pacif_3 |   .1261215   .0342581     3.68   0.000     .0588639    .1933791
+     reg_year_reg_pacif_4 |   .0018162   .0200377     0.09   0.928    -.0375231    .0411554
+                    _cons |   .1253795   .0148933     8.42   0.000       .09614    .1546189
 -------------------------------------------------------------------------------------------
-(est5 stored)
+(est1 stored)
 
 . estadd local YFE "Y"
 
 added macro:
                 e(YFE) : "Y"
 
-. eststo: reg cz_pop_1534_10_change ntr_gap l10_cz_pop_1534_10_change `demo_controls' yeardum* reg_year_* [aw = weight_cz_
-> pop_1534_90] if year == 2000 | year == 2010, cluster(czone)
+. eststo: reg cz_pop_1534_10_change ntr_gap l10_cz_pop_1534_10_change `demo_controls' yeardum* reg_year_* [
+> aw = weight_cz_pop_1534_90] if year == 2000 | year == 2010, cluster(czone)
 (sum of wgt is 158,056,378.00903)
 note: yeardum1 omitted because of collinearity
 note: yeardum2 omitted because of collinearity
 note: yeardum4 omitted because of collinearity
 
 Linear regression                               Number of obs     =      1,444
-                                                F(24, 721)        =    1781.70
+                                                F(24, 721)        =      69.18
                                                 Prob > F          =     0.0000
-                                                R-squared         =     0.9818
-                                                Root MSE          =     .07025
+                                                R-squared         =     0.6193
+                                                Root MSE          =     .06835
 
                                              (Std. Err. adjusted for 722 clusters in czone)
 -------------------------------------------------------------------------------------------
                           |               Robust
     cz_pop_1534_10_change |      Coef.   Std. Err.      t    P>|t|     [95% Conf. Interval]
 --------------------------+----------------------------------------------------------------
-                  ntr_gap |  -.6958549   .1185394    -5.87   0.000    -.9285785   -.4631314
-l10_cz_pop_1534_10_change |   .3436317   .0446123     7.70   0.000     .2560462    .4312172
-           hispanic_share |   .0910681   .0563759     1.62   0.107    -.0196124    .2017486
-            under25_share |   .2934713   .1601536     1.83   0.067    -.0209518    .6078945
-              black_share |  -.1515663   .0814484    -1.86   0.063    -.3114706    .0083379
-              amind_share |   -.190238   .1016721    -1.87   0.062    -.3898469    .0093708
-              asian_share |  -.1357244   .3119975    -0.44   0.664    -.7482564    .4768077
+                  ntr_gap |  -.6820243   .1070388    -6.37   0.000    -.8921693   -.4718793
+l10_cz_pop_1534_10_change |   .3435419   .0442329     7.77   0.000     .2567013    .4303826
+           hispanic_share |   .0872569    .056391     1.55   0.122    -.0234532     .197967
+            under25_share |   .2606702   .1546691     1.69   0.092    -.0429855    .5643259
+              black_share |  -.1569689   .0795431    -1.97   0.049    -.3131327   -.0008051
+              amind_share |   -.189351   .0860967    -2.20   0.028    -.3583812   -.0203208
+              asian_share |  -.2277772   .3069618    -0.74   0.458     -.830423    .3748686
                  yeardum1 |          0  (omitted)
                  yeardum2 |          0  (omitted)
-                 yeardum3 |   .8956813    .061592    14.54   0.000     .7747601    1.016602
+                 yeardum3 |  -.2186868   .0595911    -3.67   0.000    -.3356797   -.1016939
                  yeardum4 |          0  (omitted)
-    reg_year_reg_midatl_3 |   .0744659   .0224809     3.31   0.001     .0303301    .1186017
-    reg_year_reg_midatl_4 |  -.0004671   .0169568    -0.03   0.978    -.0337577    .0328234
-     reg_year_reg_encen_3 |   .1368547   .0160831     8.51   0.000     .1052794    .1684299
-     reg_year_reg_encen_4 |  -.0605697   .0160437    -3.78   0.000    -.0920676   -.0290718
-     reg_year_reg_wncen_3 |   .1613195   .0171021     9.43   0.000     .1277435    .1948954
-     reg_year_reg_wncen_4 |  -.0346737   .0165761    -2.09   0.037    -.0672168   -.0021306
-      reg_year_reg_satl_3 |   .1486047   .0204307     7.27   0.000     .1084939    .1887155
-      reg_year_reg_satl_4 |   .0498427   .0233445     2.14   0.033     .0040114     .095674
-     reg_year_reg_escen_3 |   .1785148   .0150779    11.84   0.000     .1489131    .2081166
-     reg_year_reg_escen_4 |  -.0188875    .021803    -0.87   0.387    -.0616924    .0239175
-     reg_year_reg_wscen_3 |   .2130377   .0165794    12.85   0.000      .180488    .2455873
-     reg_year_reg_wscen_4 |  -.0184362   .0290731    -0.63   0.526    -.0755143    .0386419
-     reg_year_reg_mount_3 |   .3500694   .0226354    15.47   0.000     .3056302    .3945085
-     reg_year_reg_mount_4 |  -.0389239   .0249501    -1.56   0.119    -.0879075    .0100597
-     reg_year_reg_pacif_3 |    .127138   .0341856     3.72   0.000     .0600228    .1942531
-     reg_year_reg_pacif_4 |  -.0016222   .0238202    -0.07   0.946    -.0483876    .0451431
-                    _cons |  -1.064772   .0580499   -18.34   0.000    -1.178739   -.9508046
+    reg_year_reg_midatl_3 |    .074462   .0224871     3.31   0.001      .030314      .11861
+    reg_year_reg_midatl_4 |  -.0051517   .0163469    -0.32   0.753     -.037245    .0269415
+     reg_year_reg_encen_3 |   .1368455    .016083     8.51   0.000     .1052704    .1684206
+     reg_year_reg_encen_4 |  -.0636166   .0153632    -4.14   0.000    -.0937786   -.0334545
+     reg_year_reg_wncen_3 |   .1613111   .0170738     9.45   0.000     .1277909    .1948314
+     reg_year_reg_wncen_4 |   -.032567   .0149482    -2.18   0.030    -.0619143   -.0032197
+      reg_year_reg_satl_3 |    .148612   .0203906     7.29   0.000       .10858     .188644
+      reg_year_reg_satl_4 |   .0444526   .0219858     2.02   0.044     .0012888    .0876165
+     reg_year_reg_escen_3 |   .1785093   .0150791    11.84   0.000     .1489051    .2081135
+     reg_year_reg_escen_4 |  -.0191886   .0206431    -0.93   0.353    -.0597164    .0213391
+     reg_year_reg_wscen_3 |   .2130405   .0165727    12.85   0.000     .1805039     .245577
+     reg_year_reg_wscen_4 |  -.0232895   .0282401    -0.82   0.410    -.0787321    .0321532
+     reg_year_reg_mount_3 |   .3500724   .0226475    15.46   0.000     .3056096    .3945353
+     reg_year_reg_mount_4 |  -.0355574   .0242079    -1.47   0.142    -.0830839     .011969
+     reg_year_reg_pacif_3 |   .1271482   .0341131     3.73   0.000     .0601754    .1941209
+     reg_year_reg_pacif_4 |  -.0003468   .0226742    -0.02   0.988    -.0448622    .0441685
+                    _cons |   .0495972   .0559174     0.89   0.375    -.0601832    .1593776
 -------------------------------------------------------------------------------------------
-(est6 stored)
+(est2 stored)
 
 . estadd local YFE "Y"
 
 added macro:
                 e(YFE) : "Y"
 
-. eststo: reg cz_pop_1534_10_change ntr_gap l10_cz_pop_1534_10_change `demo_controls' neighbor_fx l_sh_routine33 l_task_ou
-> tsource cap_labor skill_int fem_lf_share l_sh_popedu_c yeardum* reg_year_* [aw = weight_cz_pop_1534_90] if year == 2000 
-> | year == 2010, cluster(czone)
+. eststo: reg cz_pop_1534_10_change ntr_gap l10_cz_pop_1534_10_change `demo_controls' neighbor_fx l_sh_rout
+> ine33 l_task_outsource cap_labor skill_int fem_lf_share l_sh_popedu_c yeardum* reg_year_* [aw = weight_cz
+> _pop_1534_90] if year == 2000 | year == 2010, cluster(czone)
 (sum of wgt is 158,056,378.00903)
 note: yeardum1 omitted because of collinearity
 note: yeardum2 omitted because of collinearity
 note: yeardum4 omitted because of collinearity
 
 Linear regression                               Number of obs     =      1,444
-                                                F(31, 721)        =    1550.32
+                                                F(31, 721)        =      74.24
                                                 Prob > F          =     0.0000
-                                                R-squared         =     0.9825
-                                                Root MSE          =     .06913
+                                                R-squared         =     0.6338
+                                                Root MSE          =     .06721
 
                                              (Std. Err. adjusted for 722 clusters in czone)
 -------------------------------------------------------------------------------------------
                           |               Robust
     cz_pop_1534_10_change |      Coef.   Std. Err.      t    P>|t|     [95% Conf. Interval]
 --------------------------+----------------------------------------------------------------
-                  ntr_gap |  -.4109314    .204618    -2.01   0.045    -.8126496   -.0092131
-l10_cz_pop_1534_10_change |   .3327926   .0478935     6.95   0.000     .2387653    .4268199
-           hispanic_share |   .0852208   .0642679     1.33   0.185    -.0409538    .2113955
-            under25_share |   .4242562   .1772086     2.39   0.017     .0763496    .7721627
-              black_share |   -.160145   .0676544    -2.37   0.018    -.2929681   -.0273219
-              amind_share |   -.091526   .1071365    -0.85   0.393    -.3018627    .1188107
-              asian_share |  -.7192552   .2598981    -2.77   0.006    -1.229503   -.2090077
-              neighbor_fx |  -.3750054   .4332684    -0.87   0.387    -1.225624    .4756129
-           l_sh_routine33 |   .0035142    .002609     1.35   0.178     -.001608    .0086364
-         l_task_outsource |  -.0044734   .0212913    -0.21   0.834    -.0462738     .037327
-                cap_labor |  -.0078981   .0174781    -0.45   0.651    -.0422121    .0264159
-                skill_int |   .1693455   .0939947     1.80   0.072    -.0151905    .3538814
-             fem_lf_share |  -.1638102   .4215328    -0.39   0.698    -.9913884    .6637681
-            l_sh_popedu_c |   .0018523   .0011184     1.66   0.098    -.0003435    .0040481
+                  ntr_gap |  -.4211895   .1930087    -2.18   0.029    -.8001156   -.0422634
+l10_cz_pop_1534_10_change |   .3306244   .0474198     6.97   0.000      .237527    .4237218
+           hispanic_share |   .0814828   .0615712     1.32   0.186    -.0393974     .202363
+            under25_share |   .3966993   .1718925     2.31   0.021     .0592297    .7341688
+              black_share |   -.171328   .0653448    -2.62   0.009    -.2996168   -.0430392
+              amind_share |  -.0889858   .0951059    -0.94   0.350    -.2757033    .0977317
+              asian_share |   -.827243   .2428243    -3.41   0.001     -1.30397   -.3505159
+              neighbor_fx |  -.3192781   .4216584    -0.76   0.449    -1.147103    .5085468
+           l_sh_routine33 |   .0028803   .0022845     1.26   0.208    -.0016049    .0073654
+         l_task_outsource |   .0014726   .0194778     0.08   0.940    -.0367673    .0397126
+                cap_labor |  -.0071452   .0165956    -0.43   0.667    -.0397267    .0254363
+                skill_int |   .1688675   .0858487     1.97   0.050     .0003241    .3374108
+             fem_lf_share |  -.0986728   .3988458    -0.25   0.805    -.8817107    .6843651
+            l_sh_popedu_c |    .001707   .0010785     1.58   0.114    -.0004103    .0038244
                  yeardum1 |          0  (omitted)
                  yeardum2 |          0  (omitted)
-                 yeardum3 |   1.087865    .242211     4.49   0.000     .6123418    1.563388
+                 yeardum3 |  -.0167151    .230697    -0.07   0.942    -.4696332    .4362031
                  yeardum4 |          0  (omitted)
-    reg_year_reg_midatl_3 |   .0739911   .0226857     3.26   0.001     .0294531    .1185291
-    reg_year_reg_midatl_4 |   .0223183   .0167299     1.33   0.183    -.0105268    .0551634
-     reg_year_reg_encen_3 |   .1357462   .0162295     8.36   0.000     .1038834    .1676089
-     reg_year_reg_encen_4 |  -.0416317   .0179147    -2.32   0.020     -.076803   -.0064605
-     reg_year_reg_wncen_3 |   .1603148   .0171177     9.37   0.000     .1267082    .1939213
-     reg_year_reg_wncen_4 |  -.0257294   .0165073    -1.56   0.120    -.0581375    .0066786
-      reg_year_reg_satl_3 |   .1494925   .0203681     7.34   0.000     .1095046    .1894805
-      reg_year_reg_satl_4 |   .0812314   .0232381     3.50   0.001      .035609    .1268538
-     reg_year_reg_escen_3 |   .1778488    .015201    11.70   0.000     .1480053    .2076923
-     reg_year_reg_escen_4 |   .0254025   .0250619     1.01   0.311    -.0238005    .0746055
-     reg_year_reg_wscen_3 |   .2133777   .0166682    12.80   0.000     .1806537    .2461017
-     reg_year_reg_wscen_4 |   .0015338   .0273395     0.06   0.955    -.0521407    .0552084
-     reg_year_reg_mount_3 |   .3504385   .0227108    15.43   0.000     .3058512    .3950257
-     reg_year_reg_mount_4 |  -.0493914   .0298708    -1.65   0.099    -.1080355    .0092528
-     reg_year_reg_pacif_3 |   .1283678   .0339487     3.78   0.000     .0617177    .1950179
-     reg_year_reg_pacif_4 |   .0232748   .0293917     0.79   0.429    -.0344288    .0809784
-                    _cons |  -1.256862   .2407668    -5.22   0.000    -1.729549    -.784174
+    reg_year_reg_midatl_3 |   .0738961   .0227122     3.25   0.001     .0293062     .118486
+    reg_year_reg_midatl_4 |   .0179623   .0162984     1.10   0.271    -.0140357    .0499602
+     reg_year_reg_encen_3 |   .1355244   .0162378     8.35   0.000     .1036454    .1674035
+     reg_year_reg_encen_4 |  -.0443268   .0168709    -2.63   0.009    -.0774487   -.0112049
+     reg_year_reg_wncen_3 |   .1601138   .0170878     9.37   0.000      .126566    .1936615
+     reg_year_reg_wncen_4 |  -.0234049   .0143243    -1.63   0.103    -.0515272    .0047174
+      reg_year_reg_satl_3 |   .1496701   .0203948     7.34   0.000     .1096299    .1897104
+      reg_year_reg_satl_4 |   .0754977   .0219732     3.44   0.001     .0323585    .1186369
+     reg_year_reg_escen_3 |   .1777156   .0152058    11.69   0.000     .1478627    .2075684
+     reg_year_reg_escen_4 |   .0235902   .0238158     0.99   0.322    -.0231663    .0703467
+     reg_year_reg_wscen_3 |   .2134458   .0166864    12.79   0.000      .180686    .2462055
+     reg_year_reg_wscen_4 |  -.0025031   .0260332    -0.10   0.923    -.0536131    .0486069
+     reg_year_reg_mount_3 |   .3505123   .0227448    15.41   0.000     .3058584    .3951662
+     reg_year_reg_mount_4 |  -.0436954   .0287994    -1.52   0.130    -.1002362    .0128454
+     reg_year_reg_pacif_3 |   .1286138   .0338071     3.80   0.000     .0622416     .194986
+     reg_year_reg_pacif_4 |   .0281887   .0280756     1.00   0.316     -.026931    .0833084
+                    _cons |  -.1522631    .229215    -0.66   0.507    -.6022717    .2977455
 -------------------------------------------------------------------------------------------
-(est7 stored)
+(est3 stored)
 
 . estadd local YFE "Y"
 
 added macro:
                 e(YFE) : "Y"
 
-. eststo: reg cz_pop_1534_10_change ntr_gap l10_cz_pop_1534_10_change `demo_controls' debt_to_income break_estimate  neigh
-> bor_fx l_sh_routine33 l_task_outsource cap_labor skill_int fem_lf_share l_sh_popedu_c yeardum* reg_year_* [aw = weight_c
-> z_pop_1534_90] if year == 2000 | year == 2010, cluster(czone)
+. eststo: reg cz_pop_1534_10_change ntr_gap l10_cz_pop_1534_10_change `demo_controls' debt_to_income break_
+> estimate  neighbor_fx l_sh_routine33 l_task_outsource cap_labor skill_int fem_lf_share l_sh_popedu_c year
+> dum* reg_year_* [aw = weight_cz_pop_1534_90] if year == 2000 | year == 2010, cluster(czone)
 (sum of wgt is 157,610,935.29041)
 note: yeardum1 omitted because of collinearity
 note: yeardum2 omitted because of collinearity
 note: yeardum3 omitted because of collinearity
 
 Linear regression                               Number of obs     =      1,322
-                                                F(33, 721)        =    1487.85
+                                                F(33, 721)        =      57.15
                                                 Prob > F          =     0.0000
-                                                R-squared         =     0.9828
-                                                Root MSE          =     .06863
+                                                R-squared         =     0.6407
+                                                Root MSE          =     .06673
 
                                              (Std. Err. adjusted for 722 clusters in czone)
 -------------------------------------------------------------------------------------------
                           |               Robust
     cz_pop_1534_10_change |      Coef.   Std. Err.      t    P>|t|     [95% Conf. Interval]
 --------------------------+----------------------------------------------------------------
-                  ntr_gap |  -.3824167   .1984229    -1.93   0.054    -.7719724     .007139
-l10_cz_pop_1534_10_change |   .3262504   .0477126     6.84   0.000     .2325781    .4199227
-           hispanic_share |   .0710712    .066539     1.07   0.286    -.0595621    .2017046
-            under25_share |   .4579661   .1776998     2.58   0.010     .1090952    .8068369
-              black_share |  -.1708928   .0641998    -2.66   0.008    -.2969336   -.0448519
-              amind_share |  -.0966923   .0998505    -0.97   0.333    -.2927248    .0993401
-              asian_share |  -.6607884   .2606865    -2.53   0.011    -1.172584   -.1489931
-           debt_to_income |   .0564137   .0365333     1.54   0.123    -.0153106    .1281381
-           break_estimate |   .2156109   .1010859     2.13   0.033      .017153    .4140688
-              neighbor_fx |  -.1669823   .4005753    -0.42   0.677    -.9534156    .6194509
-           l_sh_routine33 |   .0022487   .0028364     0.79   0.428    -.0033198    .0078173
-         l_task_outsource |  -.0004668   .0215205    -0.02   0.983    -.0427172    .0417835
-                cap_labor |  -.0073015   .0187163    -0.39   0.697    -.0440464    .0294435
-                skill_int |   .1736661    .099104     1.75   0.080    -.0209008    .3682329
-             fem_lf_share |  -.1627592   .4683302    -0.35   0.728    -1.082213    .7566945
-            l_sh_popedu_c |   .0016706    .001228     1.36   0.174    -.0007402    .0040814
+                  ntr_gap |  -.3988123   .1851528    -2.15   0.032    -.7623153   -.0353092
+l10_cz_pop_1534_10_change |   .3231306   .0473988     6.82   0.000     .2300743    .4161868
+           hispanic_share |   .0677292   .0639681     1.06   0.290    -.0578567    .1933152
+            under25_share |   .4245709   .1716611     2.47   0.014     .0875556    .7615863
+              black_share |  -.1812061   .0615756    -2.94   0.003    -.3020949   -.0603172
+              amind_share |      -.084   .0905385    -0.93   0.354    -.2617505    .0937506
+              asian_share |  -.7824783   .2381436    -3.29   0.001    -1.250016   -.3149405
+           debt_to_income |   .0521564   .0353503     1.48   0.141    -.0172454    .1215583
+           break_estimate |   .2244947   .0878241     2.56   0.011     .0520731    .3969163
+              neighbor_fx |  -.0873255   .3882285    -0.22   0.822    -.8495188    .6748678
+           l_sh_routine33 |   .0016256   .0024625     0.66   0.509    -.0032089    .0064601
+         l_task_outsource |   .0061987   .0195145     0.32   0.751    -.0321133    .0445108
+                cap_labor |  -.0071474   .0178591    -0.40   0.689    -.0422094    .0279145
+                skill_int |   .1780625   .0886874     2.01   0.045     .0039461    .3521788
+             fem_lf_share |   -.116853   .4440092    -0.26   0.792    -.9885584    .7548524
+            l_sh_popedu_c |   .0015392   .0011867     1.30   0.195    -.0007906     .003869
                  yeardum1 |          0  (omitted)
                  yeardum2 |          0  (omitted)
                  yeardum3 |          0  (omitted)
-                 yeardum4 |  -1.123189   .2629924    -4.27   0.000    -1.639511   -.6068663
-    reg_year_reg_midatl_3 |   .0737045   .0228132     3.23   0.001     .0289162    .1184928
-    reg_year_reg_midatl_4 |   .0146167   .0154756     0.94   0.345    -.0157659    .0449994
-     reg_year_reg_encen_3 |   .1350771   .0162979     8.29   0.000     .1030802    .1670741
-     reg_year_reg_encen_4 |  -.0512359   .0172358    -2.97   0.003    -.0850744   -.0173975
-     reg_year_reg_wncen_3 |   .1597083   .0170863     9.35   0.000     .1261636    .1932531
-     reg_year_reg_wncen_4 |  -.0301103   .0151392    -1.99   0.047    -.0598326   -.0003881
-      reg_year_reg_satl_3 |   .1500284   .0204531     7.34   0.000     .1098736    .1901832
-      reg_year_reg_satl_4 |   .0425233   .0285265     1.49   0.136    -.0134816    .0985282
-     reg_year_reg_escen_3 |   .1774468   .0152376    11.65   0.000     .1475315    .2073621
-     reg_year_reg_escen_4 |   .0002655   .0264029     0.01   0.992    -.0515703    .0521013
-     reg_year_reg_wscen_3 |    .213583   .0167671    12.74   0.000     .1806649    .2465011
-     reg_year_reg_wscen_4 |  -.0040405   .0275762    -0.15   0.884    -.0581796    .0500987
-     reg_year_reg_mount_3 |   .3506612   .0228515    15.35   0.000     .3057978    .3955247
-     reg_year_reg_mount_4 |  -.0918949   .0276405    -3.32   0.001    -.1461604   -.0376294
-     reg_year_reg_pacif_3 |   .1291101   .0339221     3.81   0.000     .0625121    .1957081
-     reg_year_reg_pacif_4 |  -.0299825   .0337775    -0.89   0.375    -.0962965    .0363315
-                    _cons |  -.1689404   .0109392   -15.44   0.000    -.1904169    -.147464
+                 yeardum4 |  -.0044139    .252211    -0.02   0.986    -.4995695    .4907418
+    reg_year_reg_midatl_3 |   .0735678   .0228493     3.22   0.001     .0287088    .1184269
+    reg_year_reg_midatl_4 |   .0091179   .0143436     0.64   0.525    -.0190422     .037278
+     reg_year_reg_encen_3 |   .1347581   .0163199     8.26   0.000     .1027178    .1667983
+     reg_year_reg_encen_4 |  -.0540273   .0157441    -3.43   0.001    -.0849369   -.0231176
+     reg_year_reg_wncen_3 |   .1594192   .0170516     9.35   0.000     .1259425    .1928958
+     reg_year_reg_wncen_4 |  -.0280722   .0123517    -2.27   0.023    -.0523219   -.0038226
+      reg_year_reg_satl_3 |    .150284   .0204851     7.34   0.000     .1100664    .1905015
+      reg_year_reg_satl_4 |   .0369023   .0266561     1.38   0.167    -.0154306    .0892352
+     reg_year_reg_escen_3 |   .1772551   .0152505    11.62   0.000     .1473143    .2071959
+     reg_year_reg_escen_4 |  -.0024268   .0244888    -0.10   0.921    -.0505046     .045651
+     reg_year_reg_wscen_3 |   .2136809    .016793    12.72   0.000     .1807119    .2466498
+     reg_year_reg_wscen_4 |  -.0084596   .0260824    -0.32   0.746    -.0596661    .0427469
+     reg_year_reg_mount_3 |   .3507675   .0228946    15.32   0.000     .3058195    .3957154
+     reg_year_reg_mount_4 |  -.0845283   .0251814    -3.36   0.001    -.1339659   -.0350908
+     reg_year_reg_pacif_3 |   .1294641    .033731     3.84   0.000     .0632413    .1956868
+     reg_year_reg_pacif_4 |  -.0225543   .0300376    -0.75   0.453    -.0815259    .0364173
+                    _cons |  -.1689135   .0109403   -15.44   0.000    -.1903921   -.1474349
 -------------------------------------------------------------------------------------------
-(est8 stored)
+(est4 stored)
 
 . estadd local YFE "Y"
 
 added macro:
                 e(YFE) : "Y"
 
-. esttab using "$outdir/Table_1", replace se starlevels(* .1 ** 0.05 *** 0.01) r2 label ///
->         compress title("Log CZ Population Changes") booktabs b(3) se(3) varwidth(20) ///
->         keep(ntr_gap `demo_controls' l10_cz_pop_* debt_to_income break_estimate neighbor_fx l_sh_routine33 l_task_outsou
-> rce cap_labor skill_int l_sh_popedu_c fem_lf_share) scalars("YFE Region-Year FE")
-(output written to F:\GitHub\LaborIIreplicatation\Result/Table_1.tex)
-
-. esttab using "$outdir/Table_1", replace se starlevels(* .1 ** 0.05 *** 0.01) r2 label ///
->         compress title("Log CZ Population Changes") html b(3) se(3) varwidth(20) ///
->         keep(ntr_gap `demo_controls' l10_cz_pop_* debt_to_income break_estimate neighbor_fx l_sh_routine33 l_task_outsou
-> rce cap_labor skill_int l_sh_popedu_c fem_lf_share) scalars("YFE Region-Year FE")
-(output written to F:\GitHub\LaborIIreplicatation\Result/Table_1.html)
+. esttab using "$outdir/Table_1b", replace se starlevels(* .1 ** 0.05 *** 0.01) r2 label ///
+>         compress title("Import Competition and 10-year Changes in Log CZ Population (aged 15-34), Census"
+> ) booktabs b(3) se(3) varwidth(20) ///
+>         keep(ntr_gap `demo_controls' l10_cz_pop_* debt_to_income break_estimate neighbor_fx l_sh_routine3
+> 3 l_task_outsource cap_labor skill_int l_sh_popedu_c fem_lf_share) scalars("YFE Region-Year FE")
+(output written to F:\GitHub\LaborIIreplicatation\Result/Table_1b.tex)
 
 . eststo clear
 
@@ -713,47 +720,47 @@ added macro:
 . ********************************************************************************
 . eststo clear
 
-. eststo: reg cz_pop_1564_10_change ntr_kovak l10_cz_pop_1564_10_change yeardum* reg_year_* [aw = weight_cz_pop_1564_90] i
-> f year == 2000 | year == 2010, cluster(czone)
+. eststo: reg cz_pop_1564_10_change ntr_kovak l10_cz_pop_1564_10_change yeardum* reg_year_* [aw = weight_cz
+> _pop_1564_90] if year == 2000 | year == 2010, cluster(czone)
 (sum of wgt is 324,938,117.95715)
 note: yeardum1 omitted because of collinearity
 note: yeardum2 omitted because of collinearity
 note: yeardum4 omitted because of collinearity
 
 Linear regression                               Number of obs     =      1,444
-                                                F(19, 721)        =    6173.29
+                                                F(19, 721)        =     100.79
                                                 Prob > F          =     0.0000
-                                                R-squared         =     0.9920
-                                                Root MSE          =     .05104
+                                                R-squared         =     0.6773
+                                                Root MSE          =     .04991
 
                                              (Std. Err. adjusted for 722 clusters in czone)
 -------------------------------------------------------------------------------------------
                           |               Robust
     cz_pop_1564_10_change |      Coef.   Std. Err.      t    P>|t|     [95% Conf. Interval]
 --------------------------+----------------------------------------------------------------
-                ntr_kovak |  -.0757395   .0703278    -1.08   0.282    -.2138113    .0623323
-l10_cz_pop_1564_10_change |   .5462403   .0376968    14.49   0.000     .4722316    .6202489
+                ntr_kovak |  -.0825173   .0660673    -1.25   0.212    -.2122246      .04719
+l10_cz_pop_1564_10_change |   .5526395     .03708    14.90   0.000     .4798417    .6254372
                  yeardum1 |          0  (omitted)
                  yeardum2 |          0  (omitted)
-                 yeardum3 |   1.045185   .0202835    51.53   0.000     1.005363    1.085007
+                 yeardum3 |  -.0550534   .0178502    -3.08   0.002     -.090098   -.0200089
                  yeardum4 |          0  (omitted)
-    reg_year_reg_midatl_3 |   .0348361   .0093145     3.74   0.000     .0165493     .053123
-    reg_year_reg_midatl_4 |  -.0072224   .0142764    -0.51   0.613    -.0352506    .0208059
-     reg_year_reg_encen_3 |    .079239   .0094034     8.43   0.000     .0607778    .0977003
-     reg_year_reg_encen_4 |  -.0412978   .0121106    -3.41   0.001    -.0650741   -.0175215
-     reg_year_reg_wncen_3 |     .09681   .0113867     8.50   0.000     .0744549    .1191651
-     reg_year_reg_wncen_4 |  -.0232153   .0117787    -1.97   0.049    -.0463398   -.0000907
-      reg_year_reg_satl_3 |   .0748011   .0126933     5.89   0.000     .0498809    .0997212
-      reg_year_reg_satl_4 |   .0194761   .0137857     1.41   0.158    -.0075889     .046541
-     reg_year_reg_escen_3 |   .1048231    .008774    11.95   0.000     .0875975    .1220488
-     reg_year_reg_escen_4 |  -.0236273   .0133366    -1.77   0.077    -.0498106     .002556
-     reg_year_reg_wscen_3 |   .1094498   .0097761    11.20   0.000     .0902567    .1286428
-     reg_year_reg_wscen_4 |  -.0006741   .0252495    -0.03   0.979    -.0502453    .0488972
-     reg_year_reg_mount_3 |    .207724   .0146082    14.22   0.000     .1790443    .2364037
-     reg_year_reg_mount_4 |  -.0236735   .0163319    -1.45   0.148    -.0557373    .0083903
-     reg_year_reg_pacif_3 |   .0311353   .0262448     1.19   0.236      -.02039    .0826606
-     reg_year_reg_pacif_4 |   .0086322   .0184266     0.47   0.640    -.0275441    .0448084
-                    _cons |  -1.045849   .0164329   -63.64   0.000    -1.078111   -1.013586
+    reg_year_reg_midatl_3 |   .0351891   .0092946     3.79   0.000     .0169414    .0534368
+    reg_year_reg_midatl_4 |  -.0109149   .0119947    -0.91   0.363    -.0344637    .0126339
+     reg_year_reg_encen_3 |   .0797306   .0093745     8.51   0.000     .0613261    .0981351
+     reg_year_reg_encen_4 |  -.0430788   .0099739    -4.32   0.000    -.0626602   -.0234975
+     reg_year_reg_wncen_3 |   .0971866    .011426     8.51   0.000     .0747544    .1196189
+     reg_year_reg_wncen_4 |   -.025638   .0097558    -2.63   0.009    -.0447912   -.0064849
+      reg_year_reg_satl_3 |   .0741919   .0125558     5.91   0.000     .0495415    .0988423
+      reg_year_reg_satl_4 |    .012108   .0115144     1.05   0.293    -.0104978    .0347137
+     reg_year_reg_escen_3 |    .105019   .0087498    12.00   0.000     .0878408    .1221971
+     reg_year_reg_escen_4 |  -.0284072   .0115266    -2.46   0.014    -.0510369   -.0057775
+     reg_year_reg_wscen_3 |   .1091235   .0097053    11.24   0.000     .0900694    .1281776
+     reg_year_reg_wscen_4 |  -.0089693   .0238341    -0.38   0.707    -.0557619    .0378233
+     reg_year_reg_mount_3 |   .2071068   .0146247    14.16   0.000     .1783948    .2358188
+     reg_year_reg_mount_4 |   -.026751   .0152922    -1.75   0.081    -.0567736    .0032716
+     reg_year_reg_pacif_3 |   .0303629   .0262567     1.16   0.248    -.0211859    .0819116
+     reg_year_reg_pacif_4 |   .0039231   .0175619     0.22   0.823    -.0305554    .0384016
+                    _cons |   .0538902   .0143513     3.76   0.000     .0257148    .0820656
 -------------------------------------------------------------------------------------------
 (est1 stored)
 
@@ -762,52 +769,52 @@ l10_cz_pop_1564_10_change |   .5462403   .0376968    14.49   0.000     .4722316 
 added macro:
                 e(YFE) : "Y"
 
-. eststo: reg cz_pop_1564_10_change ntr_kovak l10_cz_pop_1564_10_change `demo_controls' yeardum* reg_year_*[aw = weight_cz
-> _pop_1564_90] if year == 2000 | year == 2010, cluster(czone)
+. eststo: reg cz_pop_1564_10_change ntr_kovak l10_cz_pop_1564_10_change `demo_controls' yeardum* reg_year_*
+> [aw = weight_cz_pop_1564_90] if year == 2000 | year == 2010, cluster(czone)
 (sum of wgt is 324,938,117.95715)
 note: yeardum1 omitted because of collinearity
 note: yeardum2 omitted because of collinearity
 note: yeardum4 omitted because of collinearity
 
 Linear regression                               Number of obs     =      1,444
-                                                F(24, 721)        =    5119.44
+                                                F(24, 721)        =      77.48
                                                 Prob > F          =     0.0000
-                                                R-squared         =     0.9924
-                                                Root MSE          =     .04983
+                                                R-squared         =     0.6919
+                                                Root MSE          =     .04885
 
                                              (Std. Err. adjusted for 722 clusters in czone)
 -------------------------------------------------------------------------------------------
                           |               Robust
     cz_pop_1564_10_change |      Coef.   Std. Err.      t    P>|t|     [95% Conf. Interval]
 --------------------------+----------------------------------------------------------------
-                ntr_kovak |  -.1221274   .0592302    -2.06   0.040    -.2384117   -.0058431
-l10_cz_pop_1564_10_change |   .5377286   .0344431    15.61   0.000     .4701079    .6053494
-           hispanic_share |   .0888622   .0470674     1.89   0.059    -.0035434    .1812677
-            under25_share |   .3495648   .1198553     2.92   0.004     .1142578    .5848718
-              black_share |  -.1307691   .0682378    -1.92   0.056    -.2647375    .0031993
-              amind_share |  -.2060221   .0626405    -3.29   0.001    -.3290016   -.0830426
-              asian_share |   .0301258   .2365044     0.13   0.899    -.4341938    .4944454
+                ntr_kovak |  -.1226604   .0555302    -2.21   0.027    -.2316807   -.0136401
+l10_cz_pop_1564_10_change |    .545082    .033947    16.06   0.000     .4784352    .6117287
+           hispanic_share |   .0843994   .0452365     1.87   0.062    -.0044116    .1732103
+            under25_share |   .3300467   .1126769     2.93   0.004     .1088327    .5512606
+              black_share |  -.1143095   .0658395    -1.74   0.083    -.2435696    .0149505
+              amind_share |  -.2053749   .0582435    -3.53   0.000     -.319722   -.0910277
+              asian_share |   .0428352   .2375953     0.18   0.857    -.4236259    .5092964
                  yeardum1 |          0  (omitted)
                  yeardum2 |          0  (omitted)
-                 yeardum3 |   1.154977   .0480856    24.02   0.000     1.060572    1.249381
+                 yeardum3 |   .0498792   .0445713     1.12   0.263    -.0376258    .1373842
                  yeardum4 |          0  (omitted)
-    reg_year_reg_midatl_3 |   .0343667   .0093048     3.69   0.000      .016099    .0526344
-    reg_year_reg_midatl_4 |   .0005711   .0155293     0.04   0.971    -.0299169    .0310591
-     reg_year_reg_encen_3 |   .0785852   .0094277     8.34   0.000     .0600762    .0970942
-     reg_year_reg_encen_4 |  -.0393857   .0137398    -2.87   0.004    -.0663606   -.0124108
-     reg_year_reg_wncen_3 |    .096309    .011325     8.50   0.000     .0740751    .1185428
-     reg_year_reg_wncen_4 |  -.0261443   .0139469    -1.87   0.061    -.0535256     .001237
-      reg_year_reg_satl_3 |   .0756113   .0126301     5.99   0.000     .0508151    .1004075
-      reg_year_reg_satl_4 |   .0382228   .0188565     2.03   0.043     .0012026     .075243
-     reg_year_reg_escen_3 |   .1045627   .0088091    11.87   0.000     .0872682    .1218573
-     reg_year_reg_escen_4 |  -.0082324   .0176272    -0.47   0.641    -.0428393    .0263744
-     reg_year_reg_wscen_3 |   .1098838   .0098291    11.18   0.000     .0905866     .129181
-     reg_year_reg_wscen_4 |  -.0134086   .0237285    -0.57   0.572    -.0599937    .0331766
-     reg_year_reg_mount_3 |   .2085449   .0145328    14.35   0.000     .1800134    .2370765
-     reg_year_reg_mount_4 |  -.0430166   .0182219    -2.36   0.019    -.0787909   -.0072423
-     reg_year_reg_pacif_3 |   .0321627    .026307     1.22   0.222    -.0194846    .0838101
-     reg_year_reg_pacif_4 |  -.0141058   .0193647    -0.73   0.467    -.0521238    .0239122
-                    _cons |  -1.154976   .0459307   -25.15   0.000     -1.24515   -1.064802
+    reg_year_reg_midatl_3 |   .0347723   .0092814     3.75   0.000     .0165504    .0529941
+    reg_year_reg_midatl_4 |  -.0044911   .0133934    -0.34   0.737    -.0307857    .0218036
+     reg_year_reg_encen_3 |   .0791501   .0093899     8.43   0.000     .0607152    .0975849
+     reg_year_reg_encen_4 |  -.0418307   .0115775    -3.61   0.000    -.0645603   -.0191011
+     reg_year_reg_wncen_3 |   .0967418   .0113679     8.51   0.000     .0744237    .1190598
+     reg_year_reg_wncen_4 |    -.02822   .0118767    -2.38   0.018    -.0515371   -.0049029
+      reg_year_reg_satl_3 |   .0749113   .0124915     6.00   0.000     .0503873    .0994353
+      reg_year_reg_satl_4 |   .0284239   .0166111     1.71   0.087    -.0041879    .0610358
+     reg_year_reg_escen_3 |   .1047877   .0087801    11.93   0.000     .0875501    .1220253
+     reg_year_reg_escen_4 |  -.0151526   .0157346    -0.96   0.336    -.0460437    .0157385
+     reg_year_reg_wscen_3 |   .1095088   .0097481    11.23   0.000     .0903708    .1286469
+     reg_year_reg_wscen_4 |   -.021756   .0223359    -0.97   0.330    -.0656073    .0220953
+     reg_year_reg_mount_3 |   .2078357   .0145537    14.28   0.000     .1792631    .2364083
+     reg_year_reg_mount_4 |  -.0444149   .0172728    -2.57   0.010    -.0783259    -.010504
+     reg_year_reg_pacif_3 |   .0312751   .0263296     1.19   0.235    -.0204166    .0829669
+     reg_year_reg_pacif_4 |  -.0185855   .0177016    -1.05   0.294    -.0533384    .0161674
+                    _cons |  -.0504524   .0427554    -1.18   0.238    -.1343923    .0334874
 -------------------------------------------------------------------------------------------
 (est2 stored)
 
@@ -816,60 +823,60 @@ l10_cz_pop_1564_10_change |   .5377286   .0344431    15.61   0.000     .4701079 
 added macro:
                 e(YFE) : "Y"
 
-. eststo: reg cz_pop_1564_10_change ntr_kovak l10_cz_pop_1564_10_change `demo_controls' neighbor_fx l_sh_routine33 l_task_
-> outsource cap_labor skill_int fem_lf_share l_sh_popedu_c yeardum* reg_year_* [aw = weight_cz_pop_1564_90] if year == 200
-> 0 | year == 2010, cluster(czone)
+. eststo: reg cz_pop_1564_10_change ntr_kovak l10_cz_pop_1564_10_change `demo_controls' neighbor_fx l_sh_ro
+> utine33 l_task_outsource cap_labor skill_int fem_lf_share l_sh_popedu_c yeardum* reg_year_* [aw = weight_
+> cz_pop_1564_90] if year == 2000 | year == 2010, cluster(czone)
 (sum of wgt is 324,938,117.95715)
 note: yeardum1 omitted because of collinearity
 note: yeardum2 omitted because of collinearity
 note: yeardum4 omitted because of collinearity
 
 Linear regression                               Number of obs     =      1,444
-                                                F(31, 721)        =    4508.28
+                                                F(31, 721)        =      79.75
                                                 Prob > F          =     0.0000
-                                                R-squared         =     0.9927
-                                                Root MSE          =     .04897
+                                                R-squared         =     0.7070
+                                                Root MSE          =     .04776
 
                                              (Std. Err. adjusted for 722 clusters in czone)
 -------------------------------------------------------------------------------------------
                           |               Robust
     cz_pop_1564_10_change |      Coef.   Std. Err.      t    P>|t|     [95% Conf. Interval]
 --------------------------+----------------------------------------------------------------
-                ntr_kovak |   -.042891   .0989147    -0.43   0.665    -.2370862    .1513043
-l10_cz_pop_1564_10_change |   .5229833   .0359251    14.56   0.000      .452453    .5935136
-           hispanic_share |   .0816141   .0502831     1.62   0.105    -.0171047     .180333
-            under25_share |   .3983989   .1229332     3.24   0.001     .1570491    .6397487
-              black_share |  -.1467925   .0536202    -2.74   0.006    -.2520629   -.0415222
-              amind_share |  -.1091144    .072047    -1.51   0.130    -.2505615    .0323326
-              asian_share |  -.4524104   .1937585    -2.33   0.020    -.8328086   -.0720122
-              neighbor_fx |  -.0259653    .332197    -0.08   0.938    -.6781543    .6262237
-           l_sh_routine33 |   .0032464    .001972     1.65   0.100    -.0006251    .0071179
-         l_task_outsource |   .0074476     .01447     0.51   0.607    -.0209608    .0358559
-                cap_labor |   .0026066   .0129929     0.20   0.841    -.0229018     .028115
-                skill_int |   .0987188   .0645773     1.53   0.127    -.0280633    .2255009
-             fem_lf_share |  -.4062475   .3143761    -1.29   0.197    -1.023449    .2109545
-            l_sh_popedu_c |   .0011525   .0009678     1.19   0.234    -.0007477    .0030526
+                ntr_kovak |  -.0553225   .0921999    -0.60   0.549    -.2363349    .1256898
+l10_cz_pop_1564_10_change |   .5262553   .0350762    15.00   0.000     .4573916    .5951189
+           hispanic_share |   .0753135   .0473519     1.59   0.112    -.0176506    .1682777
+            under25_share |   .3949827     .11696     3.38   0.001     .1653599    .6246054
+              black_share |  -.1411061   .0511682    -2.76   0.006    -.2415625   -.0406497
+              amind_share |  -.1011672   .0675994    -1.50   0.135    -.2338824     .031548
+              asian_share |  -.4929229   .1791142    -2.75   0.006    -.8445705   -.1412753
+              neighbor_fx |    .035283   .3018311     0.12   0.907    -.5572898    .6278557
+           l_sh_routine33 |   .0034278   .0018267     1.88   0.061    -.0001585    .0070142
+         l_task_outsource |   .0114695   .0132098     0.87   0.386    -.0144648    .0374038
+                cap_labor |   .0021256   .0125304     0.17   0.865    -.0224749     .026726
+                skill_int |   .1029608   .0601278     1.71   0.087    -.0150856    .2210073
+             fem_lf_share |  -.3732765   .2978674    -1.25   0.211    -.9580675    .2115144
+            l_sh_popedu_c |   .0011047   .0009299     1.19   0.235     -.000721    .0029305
                  yeardum1 |          0  (omitted)
                  yeardum2 |          0  (omitted)
-                 yeardum3 |   1.199024   .1707025     7.02   0.000     .8638907    1.534158
+                 yeardum3 |   .1193268   .1608954     0.74   0.459    -.1965526    .4352062
                  yeardum4 |          0  (omitted)
-    reg_year_reg_midatl_3 |   .0335534   .0094335     3.56   0.000     .0150329    .0520739
-    reg_year_reg_midatl_4 |   .0118248   .0147578     0.80   0.423    -.0171487    .0407982
-     reg_year_reg_encen_3 |   .0774525   .0095399     8.12   0.000     .0587232    .0961819
-     reg_year_reg_encen_4 |  -.0341148   .0151286    -2.25   0.024    -.0638162   -.0044134
-     reg_year_reg_wncen_3 |    .095441   .0112845     8.46   0.000     .0732866    .1175955
-     reg_year_reg_wncen_4 |  -.0188344   .0126027    -1.49   0.135    -.0435769     .005908
-      reg_year_reg_satl_3 |   .0770149   .0126597     6.08   0.000     .0521606    .1018692
-      reg_year_reg_satl_4 |   .0568893   .0191405     2.97   0.003     .0193115    .0944671
-     reg_year_reg_escen_3 |   .1041115   .0089182    11.67   0.000     .0866028    .1216203
-     reg_year_reg_escen_4 |   .0145891   .0208922     0.70   0.485    -.0264276    .0556059
-     reg_year_reg_wscen_3 |   .1106357   .0099197    11.15   0.000     .0911609    .1301106
-     reg_year_reg_wscen_4 |  -.0026035   .0202576    -0.13   0.898    -.0423744    .0371674
-     reg_year_reg_mount_3 |   .2099671   .0144147    14.57   0.000     .1816673    .2382669
-     reg_year_reg_mount_4 |  -.0452785   .0197587    -2.29   0.022    -.0840698   -.0064871
-     reg_year_reg_pacif_3 |   .0339426   .0263155     1.29   0.198    -.0177215    .0856068
-     reg_year_reg_pacif_4 |   .0065568   .0226565     0.29   0.772    -.0379238    .0510373
-                    _cons |  -1.197872   .1687558    -7.10   0.000    -1.529184   -.8665608
+    reg_year_reg_midatl_3 |   .0337339   .0094177     3.58   0.000     .0152444    .0522233
+    reg_year_reg_midatl_4 |   .0077534   .0126967     0.61   0.542    -.0171736    .0326803
+     reg_year_reg_encen_3 |   .0777039   .0095135     8.17   0.000     .0590264    .0963813
+     reg_year_reg_encen_4 |  -.0365457   .0128321    -2.85   0.005    -.0617383    -.011353
+     reg_year_reg_wncen_3 |   .0956336   .0112994     8.46   0.000       .07345    .1178172
+     reg_year_reg_wncen_4 |  -.0200717   .0100374    -2.00   0.046    -.0397776   -.0003657
+      reg_year_reg_satl_3 |   .0767035   .0126218     6.08   0.000     .0519235    .1014834
+      reg_year_reg_satl_4 |   .0485195   .0166667     2.91   0.004     .0157985    .0812406
+     reg_year_reg_escen_3 |   .1042116   .0089042    11.70   0.000     .0867303     .121693
+     reg_year_reg_escen_4 |   .0081925   .0183422     0.45   0.655     -.027818    .0442031
+     reg_year_reg_wscen_3 |   .1104689   .0098681    11.19   0.000     .0910952    .1298426
+     reg_year_reg_wscen_4 |  -.0082881   .0181755    -0.46   0.649    -.0439712    .0273951
+     reg_year_reg_mount_3 |   .2096515   .0144563    14.50   0.000     .1812702    .2380329
+     reg_year_reg_mount_4 |  -.0439299   .0183623    -2.39   0.017    -.0799798   -.0078801
+     reg_year_reg_pacif_3 |   .0335477      .0263     1.28   0.203    -.0180861    .0851814
+     reg_year_reg_pacif_4 |   .0077435   .0208881     0.37   0.711    -.0332652    .0487523
+                    _cons |  -.1184303   .1591978    -0.74   0.457    -.4309769    .1941164
 -------------------------------------------------------------------------------------------
 (est3 stored)
 
@@ -878,62 +885,62 @@ l10_cz_pop_1564_10_change |   .5229833   .0359251    14.56   0.000      .452453 
 added macro:
                 e(YFE) : "Y"
 
-. eststo: reg cz_pop_1564_10_change ntr_kovak l10_cz_pop_1564_10_change `demo_controls' debt_to_income break_estimate  nei
-> ghbor_fx l_sh_routine33 l_task_outsource cap_labor skill_int fem_lf_share l_sh_popedu_c yeardum* reg_year_* [aw = weight
-> _cz_pop_1564_90] if year == 2000 | year == 2010, cluster(czone)
+. eststo: reg cz_pop_1564_10_change ntr_kovak l10_cz_pop_1564_10_change `demo_controls' debt_to_income brea
+> k_estimate  neighbor_fx l_sh_routine33 l_task_outsource cap_labor skill_int fem_lf_share l_sh_popedu_c ye
+> ardum* reg_year_* [aw = weight_cz_pop_1564_90] if year == 2000 | year == 2010, cluster(czone)
 (sum of wgt is 323,973,988.53961)
 note: yeardum1 omitted because of collinearity
 note: yeardum2 omitted because of collinearity
 note: yeardum4 omitted because of collinearity
 
 Linear regression                               Number of obs     =      1,322
-                                                F(33, 721)        =    4239.87
+                                                F(33, 721)        =      80.38
                                                 Prob > F          =     0.0000
-                                                R-squared         =     0.9928
-                                                Root MSE          =     .04875
+                                                R-squared         =     0.7100
+                                                Root MSE          =     .04756
 
                                              (Std. Err. adjusted for 722 clusters in czone)
 -------------------------------------------------------------------------------------------
                           |               Robust
     cz_pop_1564_10_change |      Coef.   Std. Err.      t    P>|t|     [95% Conf. Interval]
 --------------------------+----------------------------------------------------------------
-                ntr_kovak |  -.0423176   .0957883    -0.44   0.659    -.2303749    .1457398
-l10_cz_pop_1564_10_change |    .516147   .0384309    13.43   0.000     .4406972    .5915969
-           hispanic_share |   .0749683   .0540937     1.39   0.166    -.0312317    .1811683
-            under25_share |   .4133708    .131579     3.14   0.002     .1550469    .6716946
-              black_share |  -.1544227   .0499108    -3.09   0.002    -.2524105   -.0564349
-              amind_share |  -.1178309    .071293    -1.65   0.099    -.2577977    .0221358
-              asian_share |  -.4372107   .1897831    -2.30   0.022    -.8098041   -.0646173
-           debt_to_income |   .0227366   .0311749     0.73   0.466    -.0384679    .0839411
-           break_estimate |   .1536174   .0686041     2.24   0.025     .0189298     .288305
-              neighbor_fx |   .1512955   .3107587     0.49   0.627    -.4588045    .7613955
-           l_sh_routine33 |   .0028676    .002051     1.40   0.163    -.0011592    .0068943
-         l_task_outsource |   .0099836   .0149745     0.67   0.505    -.0194153    .0393825
-                cap_labor |    .003091   .0140602     0.22   0.826    -.0245127    .0306948
-                skill_int |   .1022415   .0667665     1.53   0.126    -.0288385    .2333214
-             fem_lf_share |   -.413917   .3614501    -1.15   0.253    -1.123537    .2957034
-            l_sh_popedu_c |   .0011205   .0011084     1.01   0.312    -.0010556    .0032967
+                ntr_kovak |  -.0558599   .0888971    -0.63   0.530    -.2303881    .1186682
+l10_cz_pop_1564_10_change |   .5201125   .0377569    13.78   0.000     .4459859    .5942391
+           hispanic_share |    .069118    .051239     1.35   0.178    -.0314774    .1697134
+            under25_share |   .4084518   .1254316     3.26   0.001     .1621971    .6547065
+              black_share |  -.1483098   .0474248    -3.13   0.002     -.241417   -.0552027
+              amind_share |  -.1069677   .0679767    -1.57   0.116    -.2404236    .0264882
+              asian_share |  -.4834173   .1741872    -2.78   0.006    -.8253921   -.1414425
+           debt_to_income |   .0201505   .0300841     0.67   0.503    -.0389125    .0792134
+           break_estimate |   .1461047    .061443     2.38   0.018     .0254763    .2667332
+              neighbor_fx |   .2087704   .2850937     0.73   0.464    -.3509426    .7684835
+           l_sh_routine33 |   .0031228   .0018726     1.67   0.096    -.0005537    .0067992
+         l_task_outsource |    .013937   .0136525     1.02   0.308    -.0128664    .0407403
+                cap_labor |   .0024841   .0135608     0.18   0.855    -.0241393    .0291075
+                skill_int |   .1091742   .0612058     1.78   0.075    -.0109887    .2293372
+             fem_lf_share |  -.3853829   .3441157    -1.12   0.263    -1.060971    .2902056
+            l_sh_popedu_c |   .0010692   .0010687     1.00   0.317     -.001029    .0031673
                  yeardum1 |          0  (omitted)
                  yeardum2 |          0  (omitted)
-                 yeardum3 |   1.220841   .1991429     6.13   0.000     .8298721    1.611811
+                 yeardum3 |   .1381691    .189821     0.73   0.467    -.2344988     .510837
                  yeardum4 |          0  (omitted)
-    reg_year_reg_midatl_3 |   .0331763   .0095034     3.49   0.001     .0145187     .051834
-    reg_year_reg_midatl_4 |   .0040852   .0130894     0.31   0.755    -.0216128    .0297832
-     reg_year_reg_encen_3 |   .0769274   .0096554     7.97   0.000     .0579714    .0958834
-     reg_year_reg_encen_4 |  -.0410522   .0142793    -2.87   0.004    -.0690862   -.0130182
-     reg_year_reg_wncen_3 |   .0950386   .0113031     8.41   0.000     .0728477    .1172296
-     reg_year_reg_wncen_4 |  -.0229988   .0109929    -2.09   0.037    -.0445807   -.0014168
-      reg_year_reg_satl_3 |   .0776657   .0127507     6.09   0.000     .0526328    .1026986
-      reg_year_reg_satl_4 |   .0344063   .0234784     1.47   0.143     -.011688    .0805005
-     reg_year_reg_escen_3 |   .1039023   .0089837    11.57   0.000      .086265    .1215397
-     reg_year_reg_escen_4 |  -.0021948   .0218356    -0.10   0.920    -.0450638    .0406743
-     reg_year_reg_wscen_3 |   .1109843   .0100326    11.06   0.000     .0912878    .1306809
-     reg_year_reg_wscen_4 |  -.0071536   .0202356    -0.35   0.724    -.0468813    .0325742
-     reg_year_reg_mount_3 |   .2106265   .0146081    14.42   0.000     .1819471    .2393059
-     reg_year_reg_mount_4 |  -.0667956    .016947    -3.94   0.000    -.1000671   -.0335242
-     reg_year_reg_pacif_3 |   .0347678   .0263687     1.32   0.188    -.0170007    .0865364
-     reg_year_reg_pacif_4 |  -.0191418   .0226132    -0.85   0.398    -.0635374    .0252537
-                    _cons |  -1.219156   .1971279    -6.18   0.000    -1.606169   -.8321424
+    reg_year_reg_midatl_3 |   .0333951   .0094908     3.52   0.000     .0147622    .0520279
+    reg_year_reg_midatl_4 |   .0001597   .0111646     0.01   0.989    -.0217593    .0220787
+     reg_year_reg_encen_3 |    .077232   .0096287     8.02   0.000     .0583284    .0961356
+     reg_year_reg_encen_4 |  -.0431614   .0123613    -3.49   0.001    -.0674298    -.018893
+     reg_year_reg_wncen_3 |   .0952721    .011322     8.41   0.000     .0730439    .1175002
+     reg_year_reg_wncen_4 |  -.0242053   .0086924    -2.78   0.005    -.0412707   -.0071399
+      reg_year_reg_satl_3 |   .0772882   .0127122     6.08   0.000     .0523309    .1022455
+      reg_year_reg_satl_4 |   .0274898   .0214125     1.28   0.200    -.0145485    .0695281
+     reg_year_reg_escen_3 |   .1040237   .0089662    11.60   0.000     .0864208    .1216266
+     reg_year_reg_escen_4 |  -.0078104   .0195301    -0.40   0.689    -.0461531    .0305323
+     reg_year_reg_wscen_3 |   .1107821   .0099707    11.11   0.000      .091207    .1303572
+     reg_year_reg_wscen_4 |  -.0127587   .0184697    -0.69   0.490    -.0490194    .0235021
+     reg_year_reg_mount_3 |    .210244   .0146262    14.37   0.000      .181529     .238959
+     reg_year_reg_mount_4 |  -.0639618   .0149945    -4.27   0.000    -.0933998   -.0345238
+     reg_year_reg_pacif_3 |   .0342892   .0263407     1.30   0.193    -.0174245    .0860028
+     reg_year_reg_pacif_4 |  -.0155817   .0201963    -0.77   0.441    -.0552323    .0240689
+                    _cons |   -.136793   .1880386    -0.73   0.467    -.5059616    .2323756
 -------------------------------------------------------------------------------------------
 (est4 stored)
 
@@ -942,552 +949,261 @@ l10_cz_pop_1564_10_change |    .516147   .0384309    13.43   0.000     .4406972 
 added macro:
                 e(YFE) : "Y"
 
-. eststo: reg cz_pop_1534_10_change ntr_kovak l10_cz_pop_1534_10_change yeardum* reg_year_* [aw = weight_cz_pop_1534_90] i
-> f year == 2000 | year == 2010, cluster(czone)
+. esttab using "$outdir/Table_A1a", replace se starlevels(* .1 ** 0.05 *** 0.01) r2 label ///
+>         compress title("Import Competition Following Kovak (2013)") booktabs b(3) se(3) varwidth(20) ///
+>         keep(ntr_kovak `demo_controls' l10_cz_pop_* debt_to_income break_estimate neighbor_fx l_sh_routin
+> e33 l_task_outsource cap_labor skill_int l_sh_popedu_c fem_lf_share) scalars("YFE Region-Year FE")
+(note: file F:\GitHub\LaborIIreplicatation\Result/Table_A1a.tex not found)
+(output written to F:\GitHub\LaborIIreplicatation\Result/Table_A1a.tex)
+
+. eststo clear
+
+. 
+. 
+. eststo: reg cz_pop_1534_10_change ntr_kovak l10_cz_pop_1534_10_change yeardum* reg_year_* [aw = weight_cz
+> _pop_1534_90] if year == 2000 | year == 2010, cluster(czone)
 (sum of wgt is 158,056,378.00903)
 note: yeardum1 omitted because of collinearity
 note: yeardum2 omitted because of collinearity
 note: yeardum4 omitted because of collinearity
 
 Linear regression                               Number of obs     =      1,444
-                                                F(19, 721)        =    2032.01
+                                                F(19, 721)        =      90.04
                                                 Prob > F          =     0.0000
-                                                R-squared         =     0.9812
-                                                Root MSE          =     .07136
+                                                R-squared         =     0.6045
+                                                Root MSE          =     .06955
 
                                              (Std. Err. adjusted for 722 clusters in czone)
 -------------------------------------------------------------------------------------------
                           |               Robust
     cz_pop_1534_10_change |      Coef.   Std. Err.      t    P>|t|     [95% Conf. Interval]
 --------------------------+----------------------------------------------------------------
-                ntr_kovak |  -.3136608   .0864348    -3.63   0.000    -.4833549   -.1439668
-l10_cz_pop_1534_10_change |   .3533292   .0469247     7.53   0.000     .2612037    .4454547
+                ntr_kovak |  -.2972498   .0824954    -3.60   0.000    -.4592097   -.1352898
+l10_cz_pop_1534_10_change |   .3531205    .046176     7.65   0.000     .2624651    .4437759
                  yeardum1 |          0  (omitted)
                  yeardum2 |          0  (omitted)
-                 yeardum3 |   .7938104    .025579    31.03   0.000     .7435921    .8440286
+                 yeardum3 |  -.3054686   .0252277   -12.11   0.000    -.3549971   -.2559401
                  yeardum4 |          0  (omitted)
-    reg_year_reg_midatl_3 |   .0748907   .0223049     3.36   0.001     .0311003    .1186812
-    reg_year_reg_midatl_4 |  -.0114192   .0162612    -0.70   0.483    -.0433442    .0205057
-     reg_year_reg_encen_3 |   .1378464   .0159797     8.63   0.000      .106474    .1692188
-     reg_year_reg_encen_4 |  -.0679898   .0151618    -4.48   0.000    -.0977564   -.0382232
-     reg_year_reg_wncen_3 |   .1622184   .0171916     9.44   0.000     .1284668    .1959699
-     reg_year_reg_wncen_4 |  -.0322833   .0140342    -2.30   0.022    -.0598361   -.0047305
-      reg_year_reg_satl_3 |   .1478103   .0204361     7.23   0.000      .107689    .1879317
-      reg_year_reg_satl_4 |   .0238479   .0173251     1.38   0.169    -.0101658    .0578616
-     reg_year_reg_escen_3 |   .1791107   .0150683    11.89   0.000     .1495277    .2086938
-     reg_year_reg_escen_4 |  -.0425225   .0172794    -2.46   0.014    -.0764464   -.0085985
-     reg_year_reg_wscen_3 |   .2127334   .0164817    12.91   0.000     .1803755    .2450912
-     reg_year_reg_wscen_4 |   -.009902    .030279    -0.33   0.744    -.0693476    .0495436
-     reg_year_reg_mount_3 |   .3497392     .02254    15.52   0.000     .3054872    .3939911
-     reg_year_reg_mount_4 |  -.0235537    .022766    -1.03   0.301    -.0682493    .0211419
-     reg_year_reg_pacif_3 |   .1260377   .0343339     3.67   0.000     .0586314    .1934439
-     reg_year_reg_pacif_4 |   .0046526   .0197613     0.24   0.814     -.034144    .0434492
-                    _cons |  -.9629845   .0184355   -52.24   0.000     -.999178   -.9267909
+    reg_year_reg_midatl_3 |   .0748816   .0222981     3.36   0.001     .0311047    .1186585
+    reg_year_reg_midatl_4 |  -.0175997   .0163604    -1.08   0.282    -.0497195      .01452
+     reg_year_reg_encen_3 |   .1378251   .0159595     8.64   0.000     .1064924    .1691577
+     reg_year_reg_encen_4 |    -.07174   .0148504    -4.83   0.000    -.1008951   -.0425848
+     reg_year_reg_wncen_3 |    .162199   .0171494     9.46   0.000     .1285303    .1958678
+     reg_year_reg_wncen_4 |   -.030075   .0129935    -2.31   0.021    -.0555845   -.0045655
+      reg_year_reg_satl_3 |   .1478274   .0204025     7.25   0.000      .107772    .1878829
+      reg_year_reg_satl_4 |    .017829   .0163901     1.09   0.277     -.014349    .0500069
+     reg_year_reg_escen_3 |   .1790979   .0150661    11.89   0.000     .1495192    .2086766
+     reg_year_reg_escen_4 |  -.0434326   .0164851    -2.63   0.009    -.0757972    -.011068
+     reg_year_reg_wscen_3 |   .2127399   .0164775    12.91   0.000     .1803904    .2450895
+     reg_year_reg_wscen_4 |  -.0167842    .029539    -0.57   0.570     -.074777    .0412085
+     reg_year_reg_mount_3 |   .3497463    .022552    15.51   0.000     .3054708    .3940218
+     reg_year_reg_mount_4 |  -.0210385   .0222264    -0.95   0.344    -.0646747    .0225978
+     reg_year_reg_pacif_3 |   .1260614   .0342764     3.68   0.000     .0587679    .1933548
+     reg_year_reg_pacif_4 |  -.0014699   .0196144    -0.07   0.940    -.0399781    .0370384
+                    _cons |   .1362963    .017598     7.74   0.000     .1017469    .1708458
 -------------------------------------------------------------------------------------------
-(est5 stored)
+(est1 stored)
 
 . estadd local YFE "Y"
 
 added macro:
                 e(YFE) : "Y"
 
-. eststo: reg cz_pop_1534_10_change ntr_kovak l10_cz_pop_1534_10_change `demo_controls' yeardum* reg_year_* [aw = weight_c
-> z_pop_1534_90] if year == 2000 | year == 2010, cluster(czone)
+. eststo: reg cz_pop_1534_10_change ntr_kovak l10_cz_pop_1534_10_change `demo_controls' yeardum* reg_year_*
+>  [aw = weight_cz_pop_1534_90] if year == 2000 | year == 2010, cluster(czone)
 (sum of wgt is 158,056,378.00903)
 note: yeardum1 omitted because of collinearity
 note: yeardum2 omitted because of collinearity
 note: yeardum4 omitted because of collinearity
 
 Linear regression                               Number of obs     =      1,444
-                                                F(24, 721)        =    1755.68
+                                                F(24, 721)        =      68.01
                                                 Prob > F          =     0.0000
-                                                R-squared         =     0.9817
-                                                Root MSE          =     .07038
+                                                R-squared         =     0.6177
+                                                Root MSE          =      .0685
 
                                              (Std. Err. adjusted for 722 clusters in czone)
 -------------------------------------------------------------------------------------------
                           |               Robust
     cz_pop_1534_10_change |      Coef.   Std. Err.      t    P>|t|     [95% Conf. Interval]
 --------------------------+----------------------------------------------------------------
-                ntr_kovak |  -.3771018   .0769339    -4.90   0.000    -.5281429   -.2260606
-l10_cz_pop_1534_10_change |    .344047   .0445677     7.72   0.000      .256549    .4315451
-           hispanic_share |   .0934888   .0548535     1.70   0.089    -.0142029    .2011805
-            under25_share |   .2940006   .1571396     1.87   0.062    -.0145053    .6025065
-              black_share |   -.150087   .0814162    -1.84   0.066    -.3099281     .009754
-              amind_share |  -.1954636   .1019966    -1.92   0.056    -.3957093    .0047822
-              asian_share |  -.1887446   .3044762    -0.62   0.536    -.7865105    .4090213
+                ntr_kovak |   -.366988   .0700322    -5.24   0.000    -.5044793   -.2294967
+l10_cz_pop_1534_10_change |   .3439701   .0441988     7.78   0.000     .2571963    .4307439
+           hispanic_share |   .0897666   .0548515     1.64   0.102     -.017921    .1974543
+            under25_share |   .2602372   .1513104     1.72   0.086    -.0368244    .5572988
+              black_share |  -.1551779   .0794394    -1.95   0.051     -.311138    .0007822
+              amind_share |   -.194017   .0868618    -2.23   0.026    -.3645492   -.0234848
+              asian_share |  -.2790565   .2991407    -0.93   0.351    -.8663472    .3082343
                  yeardum1 |          0  (omitted)
                  yeardum2 |          0  (omitted)
-                 yeardum3 |   .8785966   .0609861    14.41   0.000      .758865    .9983282
+                 yeardum3 |  -.2352879   .0589316    -3.99   0.000    -.3509859     -.11959
                  yeardum4 |          0  (omitted)
-    reg_year_reg_midatl_3 |   .0744841   .0224619     3.32   0.001     .0303857    .1185826
-    reg_year_reg_midatl_4 |    .000541   .0167041     0.03   0.974    -.0322536    .0333355
-     reg_year_reg_encen_3 |   .1368971   .0160826     8.51   0.000     .1053227    .1684715
-     reg_year_reg_encen_4 |  -.0637226   .0156732    -4.07   0.000    -.0944931   -.0329521
-     reg_year_reg_wncen_3 |    .161358   .0171053     9.43   0.000     .1277758    .1949402
-     reg_year_reg_wncen_4 |  -.0351398   .0161889    -2.17   0.030    -.0669228   -.0033567
-      reg_year_reg_satl_3 |   .1485707   .0204265     7.27   0.000     .1084682    .1886731
-      reg_year_reg_satl_4 |   .0457314   .0227354     2.01   0.045     .0010959    .0903668
-     reg_year_reg_escen_3 |   .1785404   .0150821    11.84   0.000     .1489302    .2081505
-     reg_year_reg_escen_4 |  -.0238747   .0214889    -1.11   0.267    -.0660629    .0183135
-     reg_year_reg_wscen_3 |   .2130246   .0165807    12.85   0.000     .1804724    .2455769
-     reg_year_reg_wscen_4 |  -.0198921   .0287241    -0.69   0.489    -.0762849    .0365007
-     reg_year_reg_mount_3 |   .3500552   .0226339    15.47   0.000     .3056191    .3944914
-     reg_year_reg_mount_4 |  -.0425108   .0247252    -1.72   0.086    -.0910528    .0060311
-     reg_year_reg_pacif_3 |   .1270908   .0341987     3.72   0.000     .0599499    .1942318
-     reg_year_reg_pacif_4 |  -.0030391   .0234583    -0.13   0.897    -.0490939    .0430156
-                    _cons |  -1.047691   .0575571   -18.20   0.000     -1.16069    -.934691
+    reg_year_reg_midatl_3 |   .0744807   .0224685     3.31   0.001     .0303693    .1185922
+    reg_year_reg_midatl_4 |  -.0041639    .016072    -0.26   0.796    -.0357175    .0273897
+     reg_year_reg_encen_3 |   .1368893   .0160829     8.51   0.000     .1053145    .1684641
+     reg_year_reg_encen_4 |  -.0667023   .0149951    -4.45   0.000    -.0961415   -.0372631
+     reg_year_reg_wncen_3 |   .1613508   .0170772     9.45   0.000     .1278239    .1948778
+     reg_year_reg_wncen_4 |  -.0329369   .0145261    -2.27   0.024    -.0614554   -.0044183
+      reg_year_reg_satl_3 |    .148577   .0203853     7.29   0.000     .1085553    .1885987
+      reg_year_reg_satl_4 |   .0404289   .0214554     1.88   0.060    -.0016936    .0825515
+     reg_year_reg_escen_3 |   .1785356   .0150835    11.84   0.000     .1489228    .2081484
+     reg_year_reg_escen_4 |   -.024163   .0202809    -1.19   0.234    -.0639797    .0156537
+     reg_year_reg_wscen_3 |    .213027   .0165738    12.85   0.000     .1804883    .2455658
+     reg_year_reg_wscen_4 |  -.0246341   .0278612    -0.88   0.377    -.0793328    .0300646
+     reg_year_reg_mount_3 |   .3500579   .0226457    15.46   0.000     .3055985    .3945172
+     reg_year_reg_mount_4 |  -.0388983    .023968    -1.62   0.105    -.0859537    .0081571
+     reg_year_reg_pacif_3 |   .1270996   .0341279     3.72   0.000     .0600977    .1941015
+     reg_year_reg_pacif_4 |  -.0017102   .0223235    -0.08   0.939    -.0455371    .0421167
+                    _cons |   .0661946   .0553724     1.20   0.232    -.0425158     .174905
 -------------------------------------------------------------------------------------------
-(est6 stored)
+(est2 stored)
 
 . estadd local YFE "Y"
 
 added macro:
                 e(YFE) : "Y"
 
-. eststo: reg cz_pop_1534_10_change ntr_kovak l10_cz_pop_1534_10_change `demo_controls' neighbor_fx l_sh_routine33 l_task_
-> outsource cap_labor skill_int fem_lf_share l_sh_popedu_c yeardum* reg_year_* [aw = weight_cz_pop_1534_90] if year == 200
-> 0 | year == 2010, cluster(czone)
+. eststo: reg cz_pop_1534_10_change ntr_kovak l10_cz_pop_1534_10_change `demo_controls' neighbor_fx l_sh_ro
+> utine33 l_task_outsource cap_labor skill_int fem_lf_share l_sh_popedu_c yeardum* reg_year_* [aw = weight_
+> cz_pop_1534_90] if year == 2000 | year == 2010, cluster(czone)
 (sum of wgt is 158,056,378.00903)
 note: yeardum1 omitted because of collinearity
 note: yeardum2 omitted because of collinearity
 note: yeardum4 omitted because of collinearity
 
 Linear regression                               Number of obs     =      1,444
-                                                F(31, 721)        =    1529.24
+                                                F(31, 721)        =      74.98
                                                 Prob > F          =     0.0000
-                                                R-squared         =     0.9824
-                                                Root MSE          =     .06922
+                                                R-squared         =     0.6326
+                                                Root MSE          =     .06731
 
                                              (Std. Err. adjusted for 722 clusters in czone)
 -------------------------------------------------------------------------------------------
                           |               Robust
     cz_pop_1534_10_change |      Coef.   Std. Err.      t    P>|t|     [95% Conf. Interval]
 --------------------------+----------------------------------------------------------------
-                ntr_kovak |  -.1879838    .124758    -1.51   0.132    -.4329162    .0569486
-l10_cz_pop_1534_10_change |   .3345229   .0480731     6.96   0.000     .2401428    .4289029
-           hispanic_share |   .0958452   .0634949     1.51   0.132    -.0288119    .2205022
-            under25_share |   .4085071   .1746584     2.34   0.020     .0656073     .751407
-              black_share |  -.1522626    .065327    -2.33   0.020    -.2805165   -.0240086
-              amind_share |  -.0899011   .1085193    -0.83   0.408    -.3029525    .1231504
-              asian_share |  -.7389245   .2655806    -2.78   0.006    -1.260328   -.2175209
-              neighbor_fx |  -.4006758   .4341707    -0.92   0.356    -1.253066    .4517141
-           l_sh_routine33 |   .0034669    .002648     1.31   0.191    -.0017318    .0086656
-         l_task_outsource |  -.0090796   .0209276    -0.43   0.665    -.0501659    .0320067
-                cap_labor |  -.0061005   .0172363    -0.35   0.723    -.0399398    .0277388
-                skill_int |   .1753082   .0945429     1.85   0.064    -.0103041    .3609206
-             fem_lf_share |  -.1494007   .4255663    -0.35   0.726     -.984898    .6860965
-            l_sh_popedu_c |   .0021201   .0011417     1.86   0.064    -.0001214    .0043616
+                ntr_kovak |  -.1882311   .1184588    -1.59   0.112    -.4207965    .0443343
+l10_cz_pop_1534_10_change |   .3325139   .0476111     6.98   0.000      .239041    .4259868
+           hispanic_share |   .0928499   .0609103     1.52   0.128    -.0267327    .2124326
+            under25_share |   .3791122   .1689952     2.24   0.025     .0473309    .7108936
+              black_share |  -.1624613   .0629147    -2.58   0.010    -.2859793   -.0389433
+              amind_share |  -.0864521   .0968756    -0.89   0.372     -.276644    .1037398
+              asian_share |  -.8475887   .2468228    -3.43   0.001    -1.332166   -.3630116
+              neighbor_fx |  -.3504968   .4218376    -0.83   0.406    -1.178674      .47768
+           l_sh_routine33 |   .0028244   .0023328     1.21   0.226    -.0017554    .0074042
+         l_task_outsource |  -.0034117    .019153    -0.18   0.859     -.041014    .0341906
+                cap_labor |  -.0051785   .0163357    -0.32   0.751    -.0372498    .0268928
+                skill_int |   .1755566   .0865821     2.03   0.043     .0055734    .3455398
+             fem_lf_share |   -.084694   .4033858    -0.21   0.834    -.8766451    .7072572
+            l_sh_popedu_c |   .0019995   .0011058     1.81   0.071    -.0001715    .0041705
                  yeardum1 |          0  (omitted)
                  yeardum2 |          0  (omitted)
-                 yeardum3 |   1.104889   .2413557     4.58   0.000     .6310453    1.578733
+                 yeardum3 |   .0017017   .2299449     0.01   0.994    -.4497399    .4531433
                  yeardum4 |          0  (omitted)
-    reg_year_reg_midatl_3 |   .0740669   .0226672     3.27   0.001     .0295653    .1185685
-    reg_year_reg_midatl_4 |   .0242613   .0166181     1.46   0.145    -.0083643    .0568869
-     reg_year_reg_encen_3 |   .1359231   .0162227     8.38   0.000     .1040737    .1677726
-     reg_year_reg_encen_4 |  -.0417654   .0181415    -2.30   0.022    -.0773819   -.0061489
-     reg_year_reg_wncen_3 |   .1604751   .0171356     9.37   0.000     .1268336    .1941167
-     reg_year_reg_wncen_4 |  -.0248032    .016275    -1.52   0.128    -.0567552    .0071488
-      reg_year_reg_satl_3 |   .1493508   .0203646     7.33   0.000     .1093698    .1893318
-      reg_year_reg_satl_4 |   .0800786   .0236151     3.39   0.001      .033716    .1264412
-     reg_year_reg_escen_3 |   .1779551   .0151996    11.71   0.000     .1481144    .2077959
-     reg_year_reg_escen_4 |   .0247176   .0258143     0.96   0.339    -.0259625    .0753978
-     reg_year_reg_wscen_3 |   .2133234   .0166606    12.80   0.000     .1806143    .2460326
-     reg_year_reg_wscen_4 |   .0010646   .0269194     0.04   0.968    -.0517851    .0539143
-     reg_year_reg_mount_3 |   .3503795    .022693    15.44   0.000     .3058273    .3949318
-     reg_year_reg_mount_4 |  -.0519936   .0293983    -1.77   0.077    -.1097101    .0057229
-     reg_year_reg_pacif_3 |   .1281715   .0339996     3.77   0.000     .0614214    .1949215
-     reg_year_reg_pacif_4 |   .0213274   .0292151     0.73   0.466    -.0360294    .0786843
-                    _cons |  -1.273901   .2399296    -5.31   0.000    -1.744945   -.8028568
+    reg_year_reg_midatl_3 |   .0739789   .0226924     3.26   0.001     .0294279    .1185299
+    reg_year_reg_midatl_4 |   .0200709   .0162056     1.24   0.216    -.0117449    .0518867
+     reg_year_reg_encen_3 |   .1357177   .0162307     8.36   0.000     .1038525    .1675828
+     reg_year_reg_encen_4 |  -.0443131   .0171204    -2.59   0.010    -.0779249   -.0107013
+     reg_year_reg_wncen_3 |   .1602889   .0171069     9.37   0.000     .1267037    .1938741
+     reg_year_reg_wncen_4 |  -.0223359   .0140962    -1.58   0.114    -.0500104    .0053385
+      reg_year_reg_satl_3 |   .1495154   .0203898     7.33   0.000     .1094849    .1895458
+      reg_year_reg_satl_4 |   .0744699   .0224202     3.32   0.001     .0304533    .1184865
+     reg_year_reg_escen_3 |   .1778317   .0152042    11.70   0.000     .1479819    .2076814
+     reg_year_reg_escen_4 |   .0230731   .0246157     0.94   0.349    -.0252539    .0714001
+     reg_year_reg_wscen_3 |   .2133865    .016677    12.80   0.000     .1806452    .2461278
+     reg_year_reg_wscen_4 |  -.0029251   .0256076    -0.11   0.909    -.0531995    .0473494
+     reg_year_reg_mount_3 |    .350448   .0227246    15.42   0.000     .3058337    .3950622
+     reg_year_reg_mount_4 |  -.0463822   .0282916    -1.64   0.102    -.1019259    .0091615
+     reg_year_reg_pacif_3 |   .1283994   .0338649     3.79   0.000     .0619139    .1948849
+     reg_year_reg_pacif_4 |   .0261075   .0279035     0.94   0.350    -.0286744    .0808893
+                    _cons |  -.1706962   .2284868    -0.75   0.455    -.6192752    .2778828
 -------------------------------------------------------------------------------------------
-(est7 stored)
+(est3 stored)
 
 . estadd local YFE "Y"
 
 added macro:
                 e(YFE) : "Y"
 
-. eststo: reg cz_pop_1534_10_change ntr_kovak l10_cz_pop_1534_10_change `demo_controls' debt_to_income break_estimate  nei
-> ghbor_fx l_sh_routine33 l_task_outsource cap_labor skill_int fem_lf_share l_sh_popedu_c yeardum* reg_year_* [aw = weight
-> _cz_pop_1534_90] if year == 2000 | year == 2010, cluster(czone)
+. eststo: reg cz_pop_1534_10_change ntr_kovak l10_cz_pop_1534_10_change `demo_controls' debt_to_income brea
+> k_estimate  neighbor_fx l_sh_routine33 l_task_outsource cap_labor skill_int fem_lf_share l_sh_popedu_c ye
+> ardum* reg_year_* [aw = weight_cz_pop_1534_90] if year == 2000 | year == 2010, cluster(czone)
 (sum of wgt is 157,610,935.29041)
 note: yeardum1 omitted because of collinearity
 note: yeardum2 omitted because of collinearity
 note: yeardum3 omitted because of collinearity
 
 Linear regression                               Number of obs     =      1,322
-                                                F(33, 721)        =    1478.53
+                                                F(33, 721)        =      57.59
                                                 Prob > F          =     0.0000
-                                                R-squared         =     0.9827
-                                                Root MSE          =     .06869
+                                                R-squared         =     0.6398
+                                                Root MSE          =     .06681
 
                                              (Std. Err. adjusted for 722 clusters in czone)
 -------------------------------------------------------------------------------------------
                           |               Robust
     cz_pop_1534_10_change |      Coef.   Std. Err.      t    P>|t|     [95% Conf. Interval]
 --------------------------+----------------------------------------------------------------
-                ntr_kovak |  -.1798428   .1226226    -1.47   0.143    -.4205829    .0608973
-l10_cz_pop_1534_10_change |   .3275866   .0479259     6.84   0.000     .2334956    .4216776
-           hispanic_share |   .0797859   .0663483     1.20   0.230    -.0504731    .2100449
-            under25_share |   .4482767   .1765765     2.54   0.011     .1016111    .7949423
-              black_share |  -.1651475   .0616924    -2.68   0.008    -.2862657   -.0440292
-              amind_share |  -.0958913   .1017735    -0.94   0.346     -.295699    .1039165
-              asian_share |  -.6748962   .2648115    -2.55   0.011     -1.19479   -.1550026
-           debt_to_income |   .0589995   .0362077     1.63   0.104    -.0120856    .1300846
-           break_estimate |   .2177046   .1002635     2.17   0.030     .0208612    .4145479
-              neighbor_fx |  -.1854656   .4030483    -0.46   0.646     -.976754    .6058228
-           l_sh_routine33 |   .0021681    .002853     0.76   0.448    -.0034332    .0077693
-         l_task_outsource |  -.0044489   .0213054    -0.21   0.835    -.0462768    .0373791
-                cap_labor |  -.0056017   .0183887    -0.30   0.761    -.0417034    .0305001
-                skill_int |   .1781641    .099582     1.79   0.074    -.0173412    .3736693
-             fem_lf_share |  -.1431959   .4730379    -0.30   0.762    -1.071892    .7855002
-            l_sh_popedu_c |   .0018812   .0012764     1.47   0.141    -.0006247    .0043872
+                ntr_kovak |  -.1826824   .1154696    -1.58   0.114    -.4093792    .0440144
+l10_cz_pop_1534_10_change |   .3246418   .0476285     6.82   0.000     .2311347    .4181489
+           hispanic_share |   .0772927    .063885     1.21   0.227    -.0481302    .2027156
+            under25_share |   .4130834    .170205     2.43   0.015     .0789267    .7472401
+              black_share |  -.1744028   .0589585    -2.96   0.003    -.2901535    -.058652
+              amind_share |  -.0822004   .0927807    -0.89   0.376     -.264353    .0999521
+              asian_share |  -.7970602   .2411761    -3.30   0.001    -1.270551   -.3235689
+           debt_to_income |   .0550331   .0350157     1.57   0.116    -.0137118    .1237779
+           break_estimate |   .2267922   .0870682     2.60   0.009     .0558548    .3977296
+              neighbor_fx |  -.1121156   .3900494    -0.29   0.774    -.8778838    .6536526
+           l_sh_routine33 |     .00153   .0024908     0.61   0.539    -.0033602    .0064202
+         l_task_outsource |   .0018779   .0193553     0.10   0.923    -.0361216    .0398774
+                cap_labor |   -.005227    .017511    -0.30   0.765    -.0396056    .0291517
+                skill_int |   .1832631   .0894545     2.05   0.041     .0076406    .3588856
+             fem_lf_share |  -.0968365   .4493163    -0.22   0.829     -.978961    .7852881
+            l_sh_popedu_c |   .0017775   .0012398     1.43   0.152    -.0006564    .0042115
                  yeardum1 |          0  (omitted)
                  yeardum2 |          0  (omitted)
                  yeardum3 |          0  (omitted)
-                 yeardum4 |  -1.142411   .2608073    -4.38   0.000    -1.654443   -.6303786
-    reg_year_reg_midatl_3 |    .073763   .0227981     3.24   0.001     .0290044    .1185217
-    reg_year_reg_midatl_4 |   .0164595   .0154128     1.07   0.286    -.0137998    .0467188
-     reg_year_reg_encen_3 |   .1352138   .0162946     8.30   0.000     .1032233    .1672042
-     reg_year_reg_encen_4 |  -.0517018   .0176549    -2.93   0.004    -.0863629   -.0170407
-     reg_year_reg_wncen_3 |   .1598322   .0171016     9.35   0.000     .1262574     .193407
-     reg_year_reg_wncen_4 |  -.0295237   .0150044    -1.97   0.049    -.0589812   -.0000662
-      reg_year_reg_satl_3 |    .149919   .0204531     7.33   0.000     .1097642    .1900737
-      reg_year_reg_satl_4 |    .040368   .0289845     1.39   0.164    -.0165362    .0972722
-     reg_year_reg_escen_3 |   .1775289   .0152362    11.65   0.000     .1476163    .2074415
-     reg_year_reg_escen_4 |  -.0009425   .0272394    -0.03   0.972    -.0544206    .0525356
-     reg_year_reg_wscen_3 |   .2135411   .0167624    12.74   0.000     .1806322      .24645
-     reg_year_reg_wscen_4 |  -.0045558   .0271684    -0.17   0.867    -.0578944    .0487828
-     reg_year_reg_mount_3 |   .3506157   .0228393    15.35   0.000     .3057763    .3954552
-     reg_year_reg_mount_4 |  -.0956004   .0270076    -3.54   0.000    -.1486234   -.0425775
-     reg_year_reg_pacif_3 |   .1289585   .0339603     3.80   0.000     .0622855    .1956314
-     reg_year_reg_pacif_4 |  -.0335471    .033272    -1.01   0.314    -.0988687    .0317744
-                    _cons |  -.1689519   .0109392   -15.44   0.000    -.1904284   -.1474755
+                 yeardum4 |  -.0258427   .2500442    -0.10   0.918    -.5167445     .465059
+    reg_year_reg_midatl_3 |    .073634   .0228331     3.22   0.001     .0288068    .1184613
+    reg_year_reg_midatl_4 |   .0111828   .0143129     0.78   0.435    -.0169173    .0392828
+     reg_year_reg_encen_3 |   .1349126   .0163164     8.27   0.000     .1028793     .166946
+     reg_year_reg_encen_4 |  -.0543583   .0162285    -3.35   0.001     -.086219   -.0224977
+     reg_year_reg_wncen_3 |   .1595592   .0170684     9.35   0.000     .1260496    .1930689
+     reg_year_reg_wncen_4 |  -.0273292   .0122291    -2.23   0.026     -.051338   -.0033203
+      reg_year_reg_satl_3 |   .1501602   .0204832     7.33   0.000     .1099464     .190374
+      reg_year_reg_satl_4 |   .0347638   .0272171     1.28   0.202    -.0186705    .0881981
+     reg_year_reg_escen_3 |    .177348   .0152489    11.63   0.000     .1474104    .2072856
+     reg_year_reg_escen_4 |  -.0035049   .0254403    -0.14   0.890    -.0534508     .046441
+     reg_year_reg_wscen_3 |   .2136335   .0167862    12.73   0.000     .1806778    .2465891
+     reg_year_reg_wscen_4 |  -.0089299   .0256821    -0.35   0.728    -.0593506    .0414908
+     reg_year_reg_mount_3 |    .350716   .0228797    15.33   0.000     .3057972    .3956348
+     reg_year_reg_mount_4 |  -.0885053   .0244792    -3.62   0.000    -.1365642   -.0404463
+     reg_year_reg_pacif_3 |   .1292926   .0337762     3.83   0.000     .0629812     .195604
+     reg_year_reg_pacif_4 |   -.026494   .0295274    -0.90   0.370     -.084464     .031476
+                    _cons |  -.1689265   .0109403   -15.44   0.000    -.1904051   -.1474479
 -------------------------------------------------------------------------------------------
-(est8 stored)
+(est4 stored)
 
 . estadd local YFE "Y"
 
 added macro:
                 e(YFE) : "Y"
 
-. esttab using "$outdir/Table_A1", replace se starlevels(* .1 ** 0.05 *** 0.01) r2 label ///
->         compress title("Log CZ Population Changes") booktabs b(3) se(3) varwidth(20) ///
->         keep(ntr_kovak `demo_controls' l10_cz_pop_* debt_to_income break_estimate neighbor_fx l_sh_routine33 l_task_outs
-> ource cap_labor skill_int l_sh_popedu_c fem_lf_share) scalars("YFE Region-Year FE")
-(output written to F:\GitHub\LaborIIreplicatation\Result/Table_A1.tex)
-
-. esttab using "$outdir/Table_A1", replace se starlevels(* .1 ** 0.05 *** 0.01) r2 label ///
->         compress title("Log CZ Population Changes") html b(3) se(3) varwidth(20) ///
->         keep(ntr_kovak `demo_controls' l10_cz_pop_* debt_to_income break_estimate neighbor_fx l_sh_routine33 l_task_outs
-> ource cap_labor skill_int l_sh_popedu_c fem_lf_share) scalars("YFE Region-Year FE")
-(output written to F:\GitHub\LaborIIreplicatation\Result/Table_A1.html)
+. esttab using "$outdir/Table_A1b", replace se starlevels(* .1 ** 0.05 *** 0.01) r2 label ///
+>         compress title("Import Competition Following Kovak (2013)") booktabs b(3) se(3) varwidth(20) ///
+>         keep(ntr_kovak `demo_controls' l10_cz_pop_* debt_to_income break_estimate neighbor_fx l_sh_routin
+> e33 l_task_outsource cap_labor skill_int l_sh_popedu_c fem_lf_share) scalars("YFE Region-Year FE")
+(note: file F:\GitHub\LaborIIreplicatation\Result/Table_A1b.tex not found)
+(output written to F:\GitHub\LaborIIreplicatation\Result/Table_A1b.tex)
 
 . eststo clear
 
 . 
-end of do-file
-
-. su
-
-    Variable |        Obs        Mean    Std. Dev.       Min        Max
--------------+---------------------------------------------------------
-    statefip |      2,888    30.88816    14.91824          1         56
-         pop |      2,888    121051.8    63670.81      21466     877000
-    pop_male |      2,888    59552.03    31084.17      11584     452960
-  pop_female |      2,888    61499.81    32675.74       9882     424040
-   pop_white |      2,888      104921    57811.26       1473     723460
--------------+---------------------------------------------------------
-   pop_black |      2,888     9584.84    19202.14          0     433580
-   pop_amind |      2,888     2307.64    5994.712          0     101235
-   pop_asian |      2,888    971.5443    2647.326          0      63720
-     pop_his |      2,888    7987.999    17971.19         18     422180
-    pop_1564 |      2,888    77159.14    41391.73      14181     617340
--------------+---------------------------------------------------------
-    pop_1534 |      2,888    35776.57    22345.66       6070     371760
-    pop_1524 |      2,888    18739.94    11948.56       2967     200620
-    pop_2534 |      2,888    17036.63     10789.9       2282     171140
-    pop_3544 |      2,888    16013.41    8822.956       2579     105870
-    pop_4554 |      2,888    13662.24    6579.124       2253      79520
--------------+---------------------------------------------------------
-    pop_5564 |      2,888    11706.91    5718.488       1764      84560
- pop_under25 |      2,888    45759.42    26731.67       8147     375280
-    pop_lshs |      2,888    66272.91    47669.01       6748     642780
-    pop_hssc |      2,888    44281.66    25444.26       8140     299535
-      pop_cg |      2,888    10497.27    7759.276       1066      97961
--------------+---------------------------------------------------------
-pop_2534_l~s |      2,888    5088.399     5717.65          0      73260
-pop_2534_h~c |      2,888    9546.913    6172.944        980      82908
- pop_2534_cg |      2,888    2401.319    2085.332        153      29008
-pop_3544_l~s |      2,888    4584.014    4733.989         15      57400
-pop_3544_h~c |      2,888    8754.071    5976.557        866      65287
--------------+---------------------------------------------------------
- pop_3544_cg |      2,888    2675.329    2288.584         62      32379
-pop_4554_l~s |      2,888    4593.819    4749.243         37      63280
-pop_4554_h~c |      2,888    6940.242    4318.719        680      37481
- pop_4554_cg |      2,888    2128.177    1739.662        140      14782
-pop_5564_l~s |      2,888    5065.789     5112.73          0      72380
--------------+---------------------------------------------------------
-pop_5564_h~c |      2,888    5215.454    3037.771        520      25904
- pop_5564_cg |      2,888    1425.671     973.182         60       9243
-       czone |      2,888    22132.33    11095.87        100      39400
-county_pro~z |      2,888    .5667512    .3692383   .0043082          1
-      cz_pop |      2,888    295740.1    851559.3   410.9446   1.64e+07
--------------+---------------------------------------------------------
- cz_pop_male |      2,888    144250.4    414070.9   204.8503    8107054
-cz_pop_fem~e |      2,888    151489.7    437655.9   206.0944    8288770
-cz_pop_white |      2,888    235033.2    607784.8   254.9068    9631414
-cz_pop_black |      2,888    35918.58      135304          0    2476678
-cz_pop_amind |      2,888    2269.106    7517.463          0   148957.8
--------------+---------------------------------------------------------
-cz_pop_asian |      2,888    8499.301    60388.32          0    1741493
-  cz_pop_his |      2,888    30659.01    202302.9   5.565261    6580206
- cz_pop_1564 |      2,888    10.81979    1.660912   5.562578   16.19506
- cz_pop_1534 |      2,888     10.0152     1.70129   4.537697      15.45
- cz_pop_1524 |      2,888    45414.08    128994.6   55.78684    2325447
--------------+---------------------------------------------------------
- cz_pop_2534 |      2,888    45932.08      143352   37.68845    2868899
- cz_pop_3544 |      2,888     42235.3    129352.9   39.76547    2720333
- cz_pop_4554 |      2,888    34673.23    100240.5   58.44817    1990875
- cz_pop_5564 |      2,888    27311.67    74717.31    49.7676    1198333
-cz_pop_un~25 |      2,888    109362.9    314233.4   143.4843    6291763
--------------+---------------------------------------------------------
- cz_pop_lshs |      2,888    147436.3    440459.8    147.289    7924651
- cz_pop_hssc |      2,888    109970.8    309208.5   197.3623    5924435
-   cz_pop_cg |      2,888    38333.02      139927   36.18373    2569182
-cz_pop_253~s |      2,888    11569.95    42077.02   2.110921   912979.7
-cz_pop_253~c |      2,888    24456.69    71975.63   23.01715    1507360
--------------+---------------------------------------------------------
-cz_pop_253~g |      2,888    9905.449    38115.44   6.210406     666734
-cz_pop_354~s |      2,888    10202.06    36050.95   2.737889   761954.5
-cz_pop_354~c |      2,888    22088.04    65298.05   27.50162    1330480
-cz_pop_354~g |      2,888    9945.204     37358.1   6.463462   670557.4
-cz_pop_455~s |      2,888    9858.714    34341.54   4.918985     809241
--------------+---------------------------------------------------------
-cz_pop_455~c |      2,888     17208.5    48433.42    28.1429   959409.1
-cz_pop_455~g |      2,888    7606.014       28329   5.589027   580691.1
-cz_pop_556~s |      2,888    10361.45    35282.23   3.808653   853280.5
-cz_pop_556~c |      2,888    12254.08    33136.48   22.11228   586742.3
-cz_pop_556~g |      2,888    4696.133     16130.8   4.020414   314125.3
--------------+---------------------------------------------------------
-    natl_pop |      2,888    2.15e+08    6.73e+07   1.03e+08   2.81e+08
-natl_pop_m~e |      2,888    1.05e+08    3.28e+07   5.07e+07   1.38e+08
-natl_pop_f~e |      2,888    1.10e+08    3.45e+07   5.26e+07   1.44e+08
-natl_pop_w~e |      2,888    1.70e+08    5.46e+07   7.64e+07   2.11e+08
-natl_pop_b~k |      2,888    2.60e+07     7962623   1.30e+07   3.44e+07
--------------+---------------------------------------------------------
-natl_pop_a~d |      2,888     1713400    588967.1     860805    2453814
-natl_pop_a~n |      2,888     6686866     2550191    3779800   1.06e+07
-natl_pop_his |      2,888    2.22e+07     7918048   1.48e+07   3.52e+07
-natl_po~1564 |      2,888    1.42e+08    4.40e+07   6.94e+07   1.86e+08
-natl_po~1534 |      2,888    6.64e+07    2.20e+07   2.83e+07   7.96e+07
--------------+---------------------------------------------------------
-natl_po~1524 |      2,888    3.30e+07    1.08e+07   1.47e+07   4.22e+07
-natl_po~2534 |      2,888    3.34e+07    1.16e+07   1.36e+07   4.34e+07
-natl_po~3544 |      2,888    3.07e+07    1.22e+07   1.38e+07   4.59e+07
-natl_po~4554 |      2,888    2.52e+07     8114170   1.50e+07   3.76e+07
-natl_po~5564 |      2,888    1.98e+07     4483649   1.23e+07   2.42e+07
--------------+---------------------------------------------------------
-natl_pop_~25 |      2,888    7.95e+07    2.59e+07   3.50e+07   9.92e+07
-natl_pop_l~s |      2,888    1.07e+08    4.74e+07   3.61e+07   1.69e+08
-natl_pop_h~c |      2,888    8.00e+07    3.34e+07   4.69e+07   1.21e+08
- natl_pop_cg |      2,888    2.79e+07    1.37e+07   1.05e+07   4.66e+07
-natl_pop_2~s |      2,888     8396392     6224540    1759543   1.86e+07
--------------+---------------------------------------------------------
-natl_pop_2~c |      2,888    1.78e+07     7277809    7606262   2.66e+07
-natl_pop_2~g |      2,888     7198398     3206016    3783740   1.09e+07
-natl_pop_3~s |      2,888     7401776     5074771    1740798   1.56e+07
-natl_pop_3~c |      2,888    1.61e+07     8700615    7413800   2.72e+07
-natl_pop_3~g |      2,888     7234602     3863387    2632700   1.19e+07
--------------+---------------------------------------------------------
-natl_pop_4~s |      2,888     7153181     5248310    1853375   1.59e+07
-natl_pop_4~c |      2,888    1.25e+07     6123846    5181700   2.15e+07
-natl_pop_4~g |      2,888     5534213     3334936    1676760   1.08e+07
-natl_pop_5~s |      2,888     7517763     5612343    1494989   1.66e+07
-natl_pop_5~c |      2,888     8903445     3626658    4011680   1.36e+07
--------------+---------------------------------------------------------
-natl_pop_5~g |      2,888     3415902     1552683    1122160    5492194
-        year |      2,888        1995    11.18228       1980       2010
-weight~64_90 |      2,888    225026.4    635544.8   747.9131    9807394
-weight~34_90 |      2,888    109457.3    315241.9    349.724    5126857
-hispanic_s~e |      2,888     .014378    .0637117          0   .9393159
--------------+---------------------------------------------------------
- black_share |      2,888    .0193989    .0670148          0   .6154649
-under25_sh~e |      2,888    .0922857    .1606832          0   .5559266
- amind_share |      2,888    .0050823    .0261218          0   .5887678
- asian_share |      2,888    .0019278      .00674          0   .1553095
-cz_pop_156~e |      2,166   -.3023037    .5264297  -1.375045    .651228
--------------+---------------------------------------------------------
-l~64_10_ch~e |      1,444    .0605886    .1310156  -.3517027    .651228
-cz_pop_153~e |      2,166   -.4017662    .4916499  -1.408184   .6195135
-l~34_10_ch~e |      1,444   -.0678028    .1496558   -.618494   .6195135
-   ntr_kovak |      2,888    .0380413    .0789831          0   .5391623
-     ntr_gap |      2,888     .015727    .0365587          0   .3278889
--------------+---------------------------------------------------------
- neighbor_fx |      2,888    .0163889    .0314072          0   .1311565
-  reg_midatl |      2,888    .0360111      .18635          0          1
-   reg_encen |      2,888    .1163435    .3206919          0          1
-   reg_wncen |      2,888     .232687    .4226176          0          1
-    reg_satl |      2,888    .1495845    .3567254          0          1
--------------+---------------------------------------------------------
-   reg_escen |      2,888     .101108    .3015239          0          1
-   reg_wscen |      2,888    .1509695    .3580812          0          1
-   reg_mount |      2,888    .1301939    .3365749          0          1
-   reg_pacif |      2,888    .0609418     .239265          0          1
-l_sh_poped~c |      2,888    10.54861    18.76947          0   69.64967
--------------+---------------------------------------------------------
-l_sh_popfb~n |      2,888    .9780106    3.006124          0   39.94397
-l_sh_rout~33 |      2,888    7.080919    12.38114          0   37.74758
-l_task_out~e |      2,888   -.1024794    .2699108  -1.491001   1.024827
-fem_lf_share |      2,888    .1107423     .192147          0   .4911866
-debt_to_in~e |      2,772    .2320932    .4610446          0   2.464455
--------------+---------------------------------------------------------
-  hpi_change |      2,588     .329205     .174819  -.0672665   .8754663
-break_esti~e |      2,813     .010456    .0304262  -.0901525   .2341577
-   mfg_share |      2,888    .0553279    .1153661          0   .6181967
-   cap_labor |      2,888     1.04548    1.823621          0   6.054454
-   skill_int |      2,888    .0712047    .1290333          0   .6635092
--------------+---------------------------------------------------------
-    reg_newe |      2,888    .0221607    .1472314          0          1
-    yeardum1 |      2,888         .25    .4330877          0          1
-    yeardum2 |      2,888         .25    .4330877          0          1
-    yeardum3 |      2,888         .25    .4330877          0          1
-    yeardum4 |      2,888         .25    .4330877          0          1
--------------+---------------------------------------------------------
-reg_y~datl_3 |      2,888    .0090028    .0944712          0          1
-reg_y~datl_4 |      2,888    .0090028    .0944712          0          1
-reg_~encen_3 |      2,888    .0290859    .1680764          0          1
-reg_~encen_4 |      2,888    .0290859    .1680764          0          1
-reg_~wncen_3 |      2,888    .0581717    .2341085          0          1
--------------+---------------------------------------------------------
-reg_~wncen_4 |      2,888    .0581717    .2341085          0          1
-reg_y~satl_3 |      2,888    .0373961    .1897633          0          1
-reg_y~satl_4 |      2,888    .0373961    .1897633          0          1
-reg_~escen_3 |      2,888     .025277    .1569924          0          1
-reg_~escen_4 |      2,888     .025277    .1569924          0          1
--------------+---------------------------------------------------------
-reg_~wscen_3 |      2,888    .0377424    .1906055          0          1
-reg_~wscen_4 |      2,888    .0377424    .1906055          0          1
-reg_year~t_3 |      2,888    .0325485    .1774823          0          1
-reg_year~t_4 |      2,888    .0325485    .1774823          0          1
-reg_year~f_3 |      2,888    .0152355    .1225093          0          1
--------------+---------------------------------------------------------
-reg_year~f_4 |      2,888    .0152355    .1225093          0          1
-
-. di e^16.19506
-e not found
-r(111);
-
-. do "C:\Users\cliu\AppData\Local\Temp\STDa8f8_000000.tmp"
-
-. //================================== Trade and Migration IPUMS ===========================
-> ==========|
-. //////////////////////////////////////////////////////////////////////////////////////////
-> //////////|
-> clear*
-
-. set more off, perm
-(set more preference recorded)
-
-. global datadir "F:\GitHub\LaborIIreplicatation\Data"
-
-. global outdir  "F:\GitHub\LaborIIreplicatation\Result"
-
 . 
-. //////////////////////////////////////////////////////////////////////////////////////////
-> //////////|
-> use "$datadir\working_data\censuspop7010.dta", clear
-
-. keep year czone cz*
-variable czone not found
-r(111);
-
-end of do-file
-
-r(111);
-
-. do "C:\Users\cliu\AppData\Local\Temp\STDa8f8_000000.tmp"
-
-. //================================== Trade and Migration IPUMS ===========================
-> ==========|
-. //////////////////////////////////////////////////////////////////////////////////////////
-> //////////|
-> clear*
-
-. set more off, perm
-(set more preference recorded)
-
-. global datadir "F:\GitHub\LaborIIreplicatation\Data"
-
-. global outdir  "F:\GitHub\LaborIIreplicatation\Result"
-
 . 
-. //////////////////////////////////////////////////////////////////////////////////////////
-> //////////|
-> use "$datadir\working_data\censuspop7010.dta", clear
-
-. keep year cz*
-
-. rename cz90 czone
-
-. 
-end of do-file
-
-. do "C:\Users\cliu\AppData\Local\Temp\STDa8f8_000000.tmp"
-
-. 
-. foreach pop in under_25 hisp asian amind black white{
-  2.                 gen `pop'share = (`pop'/totpop)*(year == 1990)
-  3.                 bys czone : egen `pop'share1990 = max(`pop'share)
-  4.                 drop `pop'share
-  5. }
-under_25 not found
-r(111);
-
-end of do-file
-
-r(111);
-
-. do "C:\Users\cliu\AppData\Local\Temp\STDa8f8_000000.tmp"
-
-. //================================== Trade and Migration IPUMS ===========================
-> ==========|
-. //////////////////////////////////////////////////////////////////////////////////////////
-> //////////|
-> clear*
-
-. set more off, perm
-(set more preference recorded)
-
-. global datadir "F:\GitHub\LaborIIreplicatation\Data"
-
-. global outdir  "F:\GitHub\LaborIIreplicatation\Result"
-
-. 
-. //////////////////////////////////////////////////////////////////////////////////////////
-> //////////|
-> use "$datadir\working_data\censuspop7010.dta", clear
-
-. keep year cz*
-
-. rename cz90 czone
-
-. 
-. foreach pop in cz_pop_under25 cz_pop_his cz_pop_asian cz_pop_amind cz_pop_black cz_pop_whi
-> te{
-  2.                 gen `pop'share = (`pop'/cz_pop)*(year == 1990)
-  3.                 bys czone : egen `pop'share1990 = max(`pop'share)
-  4.                 drop `pop'share
-  5. }
-
-. keep year czone *share1990
-
-. save "$datadir\working_data\Census_1990Share_Controls.dta", replace
-(note: file F:\GitHub\LaborIIreplicatation\Data\working_data\Census_1990Share_Controls.dta n
-> ot found)
-file F:\GitHub\LaborIIreplicatation\Data\working_data\Census_1990Share_Controls.dta saved
-
-. 
-end of do-file
-
-. exit, clear
+. log close
+      name:  <unnamed>
+       log:  F:\GitHub\LaborIIreplicatation\Log\Census Analysis.log
+  log type:  text
+ closed on:  16 Dec 2019, 12:24:47
+-----------------------------------------------------------------------------------------------------------

@@ -124,7 +124,7 @@ lab var cz_pop_1534_10_change "Change in Log Population, 15-34"
 
 
 ********************************************************************************
-*Table 1************************************************************************
+*Table 1 (a) *******************************************************************
 ********************************************************************************
 eststo clear
 eststo: reg cz_pop_1564_10_change ntr_gap l10_cz_pop_1564_10_change yeardum* reg_year_* [aw = weight_cz_pop_1564_90] if year == 2000 | year == 2010, cluster(czone)
@@ -135,6 +135,12 @@ eststo: reg cz_pop_1564_10_change ntr_gap l10_cz_pop_1564_10_change `demo_contro
 estadd local YFE "Y"
 eststo: reg cz_pop_1564_10_change ntr_gap l10_cz_pop_1564_10_change `demo_controls' debt_to_income break_estimate  neighbor_fx l_sh_routine33 l_task_outsource cap_labor skill_int fem_lf_share l_sh_popedu_c yeardum* reg_year_* [aw = weight_cz_pop_1564_90] if year == 2000 | year == 2010, cluster(czone)
 estadd local YFE "Y"
+esttab using "$outdir/Table_1a", replace se starlevels(* .1 ** 0.05 *** 0.01) r2 label ///
+	compress title("Import Competition and 10-year Changes in Log CZ Population (aged 15-64), Census") booktabs b(3) se(3) varwidth(20) ///
+	keep(ntr_gap `demo_controls' l10_cz_pop_* debt_to_income break_estimate neighbor_fx l_sh_routine33 l_task_outsource cap_labor skill_int l_sh_popedu_c fem_lf_share) scalars("YFE Region-Year FE")
+eststo clear
+
+eststo clear
 eststo: reg cz_pop_1534_10_change ntr_gap l10_cz_pop_1534_10_change yeardum* reg_year_* [aw = weight_cz_pop_1534_90] if year == 2000 | year == 2010, cluster(czone)
 estadd local YFE "Y"
 eststo: reg cz_pop_1534_10_change ntr_gap l10_cz_pop_1534_10_change `demo_controls' yeardum* reg_year_* [aw = weight_cz_pop_1534_90] if year == 2000 | year == 2010, cluster(czone)
@@ -143,11 +149,8 @@ eststo: reg cz_pop_1534_10_change ntr_gap l10_cz_pop_1534_10_change `demo_contro
 estadd local YFE "Y"
 eststo: reg cz_pop_1534_10_change ntr_gap l10_cz_pop_1534_10_change `demo_controls' debt_to_income break_estimate  neighbor_fx l_sh_routine33 l_task_outsource cap_labor skill_int fem_lf_share l_sh_popedu_c yeardum* reg_year_* [aw = weight_cz_pop_1534_90] if year == 2000 | year == 2010, cluster(czone)
 estadd local YFE "Y"
-esttab using "$outdir/Table_1", replace se starlevels(* .1 ** 0.05 *** 0.01) r2 label ///
-	compress title("Log CZ Population Changes") booktabs b(3) se(3) varwidth(20) ///
-	keep(ntr_gap `demo_controls' l10_cz_pop_* debt_to_income break_estimate neighbor_fx l_sh_routine33 l_task_outsource cap_labor skill_int l_sh_popedu_c fem_lf_share) scalars("YFE Region-Year FE")
-esttab using "$outdir/Table_1", replace se starlevels(* .1 ** 0.05 *** 0.01) r2 label ///
-	compress title("Log CZ Population Changes") html b(3) se(3) varwidth(20) ///
+esttab using "$outdir/Table_1b", replace se starlevels(* .1 ** 0.05 *** 0.01) r2 label ///
+	compress title("Import Competition and 10-year Changes in Log CZ Population (aged 15-34), Census") booktabs b(3) se(3) varwidth(20) ///
 	keep(ntr_gap `demo_controls' l10_cz_pop_* debt_to_income break_estimate neighbor_fx l_sh_routine33 l_task_outsource cap_labor skill_int l_sh_popedu_c fem_lf_share) scalars("YFE Region-Year FE")
 eststo clear
 
@@ -164,6 +167,12 @@ eststo: reg cz_pop_1564_10_change ntr_kovak l10_cz_pop_1564_10_change `demo_cont
 estadd local YFE "Y"
 eststo: reg cz_pop_1564_10_change ntr_kovak l10_cz_pop_1564_10_change `demo_controls' debt_to_income break_estimate  neighbor_fx l_sh_routine33 l_task_outsource cap_labor skill_int fem_lf_share l_sh_popedu_c yeardum* reg_year_* [aw = weight_cz_pop_1564_90] if year == 2000 | year == 2010, cluster(czone)
 estadd local YFE "Y"
+esttab using "$outdir/Table_A1a", replace se starlevels(* .1 ** 0.05 *** 0.01) r2 label ///
+	compress title("Import Competition Following Kovak (2013)") booktabs b(3) se(3) varwidth(20) ///
+	keep(ntr_kovak `demo_controls' l10_cz_pop_* debt_to_income break_estimate neighbor_fx l_sh_routine33 l_task_outsource cap_labor skill_int l_sh_popedu_c fem_lf_share) scalars("YFE Region-Year FE")
+eststo clear
+
+
 eststo: reg cz_pop_1534_10_change ntr_kovak l10_cz_pop_1534_10_change yeardum* reg_year_* [aw = weight_cz_pop_1534_90] if year == 2000 | year == 2010, cluster(czone)
 estadd local YFE "Y"
 eststo: reg cz_pop_1534_10_change ntr_kovak l10_cz_pop_1534_10_change `demo_controls' yeardum* reg_year_* [aw = weight_cz_pop_1534_90] if year == 2000 | year == 2010, cluster(czone)
@@ -172,10 +181,11 @@ eststo: reg cz_pop_1534_10_change ntr_kovak l10_cz_pop_1534_10_change `demo_cont
 estadd local YFE "Y"
 eststo: reg cz_pop_1534_10_change ntr_kovak l10_cz_pop_1534_10_change `demo_controls' debt_to_income break_estimate  neighbor_fx l_sh_routine33 l_task_outsource cap_labor skill_int fem_lf_share l_sh_popedu_c yeardum* reg_year_* [aw = weight_cz_pop_1534_90] if year == 2000 | year == 2010, cluster(czone)
 estadd local YFE "Y"
-esttab using "$outdir/Table_A1", replace se starlevels(* .1 ** 0.05 *** 0.01) r2 label ///
-	compress title("Log CZ Population Changes") booktabs b(3) se(3) varwidth(20) ///
-	keep(ntr_kovak `demo_controls' l10_cz_pop_* debt_to_income break_estimate neighbor_fx l_sh_routine33 l_task_outsource cap_labor skill_int l_sh_popedu_c fem_lf_share) scalars("YFE Region-Year FE")
-esttab using "$outdir/Table_A1", replace se starlevels(* .1 ** 0.05 *** 0.01) r2 label ///
-	compress title("Log CZ Population Changes") html b(3) se(3) varwidth(20) ///
+esttab using "$outdir/Table_A1b", replace se starlevels(* .1 ** 0.05 *** 0.01) r2 label ///
+	compress title("Import Competition Following Kovak (2013)") booktabs b(3) se(3) varwidth(20) ///
 	keep(ntr_kovak `demo_controls' l10_cz_pop_* debt_to_income break_estimate neighbor_fx l_sh_routine33 l_task_outsource cap_labor skill_int l_sh_popedu_c fem_lf_share) scalars("YFE Region-Year FE")
 eststo clear
+
+
+
+log close
