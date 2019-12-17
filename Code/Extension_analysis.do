@@ -40,7 +40,7 @@ gen l10_`x' = l.`x'
 gen `x'_10_change = `x' - l10_`x'
 drop l10_`x'
 
-*10 year changes in log population, lagged 10 years. 
+*10 year changes in log population, lagged 10 years.
 *That is, for 2000-2010 this will be the 1990-2000 change in log population
 *For 1990-2000, this will be the 1980-1990 change
 gen l10_`x'_10_change = l.`x'_10_change
@@ -78,7 +78,7 @@ keep if _merge == 3
 drop _merge
 
 
-*All of the trade measures and controls turn on for 2000-2010 
+*All of the trade measures and controls turn on for 2000-2010
 foreach x of varlist ntr_gap ntr_kovak cap_labor skill_int fem_lf_share l_sh_popedu_c l_sh_routine33 l_task_outsource debt_to_income break_estimate mfg_share neighbor_fx l_sh_popfborn {
 replace `x' = 0 if year != 2010
 }
@@ -86,7 +86,7 @@ replace `x' = 0 if year != 2010
 ********************************************************************************
 *Create region-year dummy variables*********************************************
 ********************************************************************************
-*Creating a Census region dummy for New England, which is omitted 
+*Creating a Census region dummy for New England, which is omitted
 gen reg_newe = 0
 replace reg_newe = 1 if (reg_midatl + reg_encen + reg_wncen + reg_satl + reg_escen + reg_wscen + reg_mount + reg_pacif) == 0
 
@@ -96,7 +96,7 @@ foreach x of varlist reg_midatl reg_encen reg_wncen reg_satl reg_escen reg_wscen
 		gen reg_year_`x'_`y' = `x'*yeardum`y'
 		}
 	}
-	
+
 
 
 lab var ntr_gap "NTR Gap"
@@ -193,17 +193,9 @@ gen ntr_lpop = ntr_gap*ltotpop
 eststo clear
 eststo: reg age1564_10_change ntr_gap l10_age1564_10_change ltotpop ntr_lpop yeardum* reg_year_* [aw = weight_age1564_90] if year == 2000 | year == 2010, cluster(czone)
 estadd local YFE "Y"
-eststo: reg age1564_10_change ntr_gap l10_age1564_10_change ltotpop ntr_lpop `demo_controls' yeardum* reg_year_*[aw = weight_age1564_90] if year == 2000 | year == 2010, cluster(czone)
-estadd local YFE "Y"
-eststo: reg age1564_10_change ntr_gap l10_age1564_10_change ltotpop ntr_lpop `demo_controls' neighbor_fx l_sh_routine33 l_task_outsource cap_labor skill_int fem_lf_share l_sh_popedu_c yeardum* reg_year_* [aw = weight_age1564_90] if year == 2000 | year == 2010, cluster(czone)
-estadd local YFE "Y"
 eststo: reg age1564_10_change ntr_gap l10_age1564_10_change ltotpop ntr_lpop `demo_controls' debt_to_income break_estimate  neighbor_fx l_sh_routine33 l_task_outsource cap_labor skill_int fem_lf_share l_sh_popedu_c yeardum* reg_year_* [aw = weight_age1564_90] if year == 2000 | year == 2010, cluster(czone)
 estadd local YFE "Y"
 eststo: reg age1534_10_change ntr_gap l10_age1534_10_change ltotpop ntr_lpop yeardum* reg_year_* [aw = weight_age1534_90] if year == 2000 | year == 2010, cluster(czone)
-estadd local YFE "Y"
-eststo: reg age1534_10_change ntr_gap l10_age1534_10_change ltotpop ntr_lpop `demo_controls' yeardum* reg_year_* [aw = weight_age1534_90] if year == 2000 | year == 2010, cluster(czone)
-estadd local YFE "Y"
-eststo: reg age1534_10_change ntr_gap l10_age1534_10_change ltotpop ntr_lpop `demo_controls' neighbor_fx l_sh_routine33 l_task_outsource cap_labor skill_int fem_lf_share l_sh_popedu_c yeardum* reg_year_* [aw = weight_age1534_90] if year == 2000 | year == 2010, cluster(czone)
 estadd local YFE "Y"
 eststo: reg age1534_10_change ntr_gap l10_age1534_10_change ltotpop ntr_lpop `demo_controls' debt_to_income break_estimate  neighbor_fx l_sh_routine33 l_task_outsource cap_labor skill_int fem_lf_share l_sh_popedu_c yeardum* reg_year_* [aw = weight_age1534_90] if year == 2000 | year == 2010, cluster(czone)
 estadd local YFE "Y"
